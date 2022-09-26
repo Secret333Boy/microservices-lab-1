@@ -8,7 +8,7 @@ public class PingController {
 
     @GetMapping("/ping")
     public String getResponse(){
-        return "pong";
+        return "Hello from service 1";
     }
 
 }
