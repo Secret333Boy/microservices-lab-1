@@ -10,7 +10,7 @@ app.get("/ping", (_req, res) => {
   res.json("Hello from service 2");
 });
 
-app.get("*", (req, res) => {
+app.get("*", (_req, res) => {
   res.status(404).send();
 });
 
