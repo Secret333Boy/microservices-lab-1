@@ -1,9 +1,9 @@
-FROM openjdk:17
+FROM openjdk:17-alpine
 
 WORKDIR /src
 
 COPY . .
 
-EXPOSE 81:8081
+EXPOSE 81
 
 CMD ["./mvnw", "spring-boot:run"]
