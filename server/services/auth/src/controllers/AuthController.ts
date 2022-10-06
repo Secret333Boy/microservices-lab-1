@@ -19,7 +19,7 @@ import cookie from 'cookie';
 import ErrorResponse from '../models/interfaces/ErrorResponse';
 import PongResponse from '../models/interfaces/PongResponse';
 
-@Route('/')
+@Route('/api/auth')
 export class AuthController extends Controller {
   private authService: AuthService = new AuthService();
   constructor() {

@@ -3,7 +3,7 @@
  */
 
 import bcrypt from "bcrypt";
-import sequelize from "../repository/sequelize";
+import sequelize from "../repository/memorySequelize";
 import TokenService from "./TokenService";
 import User from "../models/sequelize/User";
 import UserDTO from "../models/interfaces/UserDTO";
@@ -14,8 +14,7 @@ import { request } from "undici";
 
 if (!process.env.EMAIL_SERVICE_HOST || !process.env.EMAIL_SERVICE_PORT)
   throw new Error("Kubernetes: email service unknown");
-const emailURL =
-  `http://${process.env.EMAIL_SERVICE_HOST}:${process.env.EMAIL_SERVICE_PORT}`;
+const emailURL = `http://${process.env.EMAIL_SERVICE_HOST}:${process.env.EMAIL_SERVICE_PORT}/api/email/send-activation`;
 export default class AuthService {
   private tokenService: TokenService = new TokenService();
 
@@ -31,14 +30,13 @@ export default class AuthService {
     const hash = await bcrypt.hash(password, <string>process.env.PASSWORD_SALT);
     const transaction = await sequelize.transaction();
     const user = await User.create({ email, hash }, { transaction });
-    /**
-     * Unccomment this when email and profile services are ready
-     */
     try {
-      const { statusCode: messageStatus } = await request(emailURL, {
+      console.log(emailURL);
+      const { statusCode: messageStatus, body } = await request(emailURL, {
         method: "POST",
         body: JSON.stringify({
-          link: `${
+          email_to: user.email,
+          activation_link: `${
             process.env.GATEWAY_URL
           }/auth/activate/${user.activationId}`,
         }),
@@ -47,6 +45,7 @@ export default class AuthService {
           "api-secret": <string>process.env.API_SECRET,
         },
       });
+      console.error(await body.text());
       if (messageStatus !== 200) throw new Error('Mail service issue');
     } catch (e) {
       await transaction.rollback();

@@ -15,7 +15,6 @@ import javax.validation.Valid;
 @RequestMapping("/api/email")
 @RequiredArgsConstructor
 public class EMailController {
-
     private final MailService mailService;
 
     @PostMapping("/send")
@@ -28,7 +27,4 @@ public class EMailController {
         EMailDetails eMailDetails = new EMailDetails(details.getEmailTo(), "Movie Booking Activation", details.getActivationLink());
         return mailService.sendEMail(eMailDetails);
     }
-
-
-
 }

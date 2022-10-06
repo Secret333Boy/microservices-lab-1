@@ -2,11 +2,11 @@
  * @author Eugene Pashkovsky <pashkovskiy.eugen@gmail.com>
  */
 
-import db from './repository/sequelize';
+import db from './repository/memorySequelize';
 import app from './app';
 import { Server } from 'http';
 import { Socket } from 'net';
-const port = process.env.PORT || 82;
+const port = process.env.PORT || 8082;
 
 db.authenticate()
   .then(() => {
