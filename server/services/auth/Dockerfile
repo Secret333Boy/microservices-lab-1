@@ -8,6 +8,6 @@ RUN npm i
 
 RUN npm run build
 
-EXPOSE 82
+EXPOSE 8082
 
 CMD ["npm", "start"]
