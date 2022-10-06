@@ -38,7 +38,7 @@ export default class AuthService {
           email_to: user.email,
           activation_link: `${
             process.env.GATEWAY_URL
-          }/auth/activate/${user.activationId}`,
+          }/api/auth/activate/${user.activationId}`,
         }),
         headers: {
           "Content-Type": "application/json",

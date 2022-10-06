@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: email-deployment
+  name: client-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: email-pod
+      app: client-pod
   template:
     metadata:
       labels:
-        app: email-pod
+        app: client-pod
     spec:
       containers:
-        - image: zaranik/email_service:3.0
-          name: email-container
+        - image: secret333boy/client:1.0
+          name: client-container
           ports:
-            - containerPort: 8083
+            - containerPort: 80
           resources:
             limits:
               memory: "128Mi"

@@ -2,17 +2,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: auth-ingress
+  name: client-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
     - http:
         paths:
-          - path: /api/auth
+          - path: /
             pathType: "Prefix"
             backend:
               service:
-                name: auth
+                name: client
                 port:
                   number: 80
