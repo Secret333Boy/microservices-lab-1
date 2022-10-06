@@ -1,5 +1,6 @@
 package com.kpi.zaranik.third_service.controllers;
 
+import com.kpi.zaranik.third_service.dto.request.ActivationDetails;
 import com.kpi.zaranik.third_service.dto.request.EMailDetails;
 import com.kpi.zaranik.third_service.services.MailService;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,13 @@ public class EMailController {
     public String sendEMail(@RequestBody @Valid EMailDetails details){
         return mailService.sendEMail(details);
     }
+
+    @PostMapping("/send-activation")
+    public String sendEMail(@RequestBody @Valid ActivationDetails details){
+        EMailDetails eMailDetails = new EMailDetails(details.getEmailTo(), "Movie Booking Activation", details.getActivationLink());
+        return mailService.sendEMail(eMailDetails);
+    }
+
+
 
 }
