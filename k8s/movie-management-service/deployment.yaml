@@ -13,7 +13,7 @@ spec:
         app: movie-management-pod
     spec:
       containers:
-        - image: zaranik/movie_management_service:2.0
+        - image: 96223961382/movie-management-service:1.0
           name: movie-management-container
           ports:
             - containerPort: 8081
