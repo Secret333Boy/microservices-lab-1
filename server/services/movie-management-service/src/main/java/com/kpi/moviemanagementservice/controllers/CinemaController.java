@@ -4,7 +4,7 @@ import com.kpi.moviemanagementservice.models.Cinema;
 import com.kpi.moviemanagementservice.models.CinemaFeedback;
 import com.kpi.moviemanagementservice.services.CinemaFeedbackService;
 import com.kpi.moviemanagementservice.services.CinemaService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,15 +14,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/cinemas")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CinemaController {
 
-    private CinemaService cinemaService;
-    private CinemaFeedbackService cinemaFeedbackService;
+    private final CinemaService cinemaService;
+    private final CinemaFeedbackService cinemaFeedbackService;
 
     @GetMapping
     public List<Cinema> getAll() {
         return cinemaService.getAllCinemas();
+    }
+
+    @GetMapping("/{id}")
+    public Cinema getCinema(@PathVariable Long id) {
+        return cinemaService.getCinemaById(id);
     }
 
     @GetMapping("/{movie_id}/feedbacks")

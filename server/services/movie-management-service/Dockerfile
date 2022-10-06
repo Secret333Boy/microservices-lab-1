@@ -1,9 +1,13 @@
-FROM openjdk:17-alpine
+FROM maven:3.8-openjdk-17
 
-WORKDIR /src
+WORKDIR app
 
-COPY . .
+COPY pom.xml /app/pom.xml
 
-EXPOSE 81
+COPY src /app/src
 
-CMD ["./mvnw", "spring-boot:run"]
+EXPOSE 8081
+
+RUN ["mvn", "clean", "package"]
+
+CMD ["mvn", "spring-boot:run"]
