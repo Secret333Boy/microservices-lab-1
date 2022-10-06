@@ -13,7 +13,7 @@ spec:
         app: auth-pod
     spec:
       containers:
-        - image: secret333boy/auth:1.4
+        - image: secret333boy/auth:1.5
           name: auth-container
           ports:
             - containerPort: 8082
