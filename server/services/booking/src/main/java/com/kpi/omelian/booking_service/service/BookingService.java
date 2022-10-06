@@ -2,22 +2,22 @@ package com.kpi.omelian.booking_service.service;
 
 import com.kpi.omelian.booking_service.dto.TicketDto;
 import com.kpi.omelian.booking_service.entity.Ticket;
-import com.kpi.omelian.booking_service.repository.TicketRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.kpi.omelian.booking_service.exception.NonExistedTicketError;
 
-import javax.validation.Valid;
+import java.util.List;
 
-@Service
-public class BookingService {
+public interface BookingService {
 
-    @Autowired
-    private TicketRepository ticketRepository;
+    List<Ticket> getAllTickets();
 
-    public Ticket bookSeat(TicketDto ticketDto) {
-        return new Ticket();
-    }
+    List<Ticket> getAllTicketsByUserId(Long userId);
+
+    List<Ticket> getAllTicketsBySessionId(Long sessionId);
+
+    List<Ticket> getAllTicketsByPlaceId(Long placeId);
+
+    Ticket bookSeat(TicketDto ticketDto);
+
+    void removeBooking(Long bookingId) throws NonExistedTicketError;
 
 }
