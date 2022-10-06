@@ -9,6 +9,7 @@ import java.util.Random;
 
 @Service
 public class MockMovieRepository {
+    private Long id = 1L;
     private List<Movie> movies;
 
     public MockMovieRepository() {
@@ -16,7 +17,7 @@ public class MockMovieRepository {
         Random random = new Random();
         for (int i = 0; i < 5; i++) {
             this.movies.add(Movie.builder()
-                    .id((long) (i + 1))
+                    .id(id++)
                     .name("Movie " + (i + 1))
                     .description("Description of movie " + (i + 1))
                     .duration(random.nextLong(60 * 1000, 24 * 60 * 60 * 1000))
@@ -27,5 +28,30 @@ public class MockMovieRepository {
 
     public List<Movie> getMovies() {
         return movies;
+    }
+
+    public Movie createMovie(Movie movie) {
+        movie.setId(id++);
+        movies.add(movie);
+        return movie;
+    }
+
+    public Movie updateMovie(Movie movie) {
+        for (int i = 0; i < movies.size(); i++) {
+            if (movies.get(i).getId().equals(movie.getId())) {
+                movies.set(i, movie);
+                return movie;
+            }
+        }
+        return null;
+    }
+
+    public Movie deleteMovie(Long id) {
+        for (int i = 0; i < movies.size(); i++) {
+            if (movies.get(i).getId().equals(id)) {
+                return movies.remove(i);
+            }
+        }
+        return null;
     }
 }

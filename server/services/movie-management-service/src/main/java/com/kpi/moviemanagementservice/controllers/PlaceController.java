@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/places")
+@RequestMapping("/api/places")
 @RequiredArgsConstructor
 public class PlaceController {
 
@@ -25,5 +25,20 @@ public class PlaceController {
             return placeService.getAllPlaces();
         }
         return placeService.getAllPlacesOfHall(hallId);
+    }
+
+    @PostMapping
+    public Place createPlace(@RequestBody Place place) {
+        return placeService.createPlace(place);
+    }
+
+    @PutMapping
+    public Place updatePlace(@RequestBody Place place) {
+        return placeService.updatePlace(place);
+    }
+
+    @DeleteMapping("{id}")
+    public Place deletePlace(@PathVariable Long id) {
+        return placeService.deletePlace(id);
     }
 }

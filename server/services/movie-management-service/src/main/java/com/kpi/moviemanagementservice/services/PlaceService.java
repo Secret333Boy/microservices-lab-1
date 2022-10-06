@@ -25,4 +25,16 @@ public class PlaceService {
     public Place getPlaceById(Long id) {
         return mockPlaceRepository.getPlaces().stream().filter(place -> place.getId().equals(id)).findFirst().orElseThrow();
     }
+
+    public Place createPlace(Place place) {
+        return mockPlaceRepository.createPlace(place);
+    }
+
+    public Place updatePlace(Place place) {
+        return mockPlaceRepository.updatePlace(place);
+    }
+
+    public Place deletePlace(Long id) {
+        return mockPlaceRepository.deletePlace(id);
+    }
 }

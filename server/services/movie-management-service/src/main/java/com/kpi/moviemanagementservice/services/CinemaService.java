@@ -20,4 +20,16 @@ public class CinemaService {
     public Cinema getCinemaById(Long id) {
         return mockCinemaRepository.getCinemas().stream().filter(cinema -> cinema.getId().equals(id)).findFirst().orElseThrow();
     }
+
+    public Cinema updateCinema(Cinema cinema) {
+        return mockCinemaRepository.updateCinema(cinema);
+    }
+
+    public Cinema createCinema(Cinema cinema) {
+        return mockCinemaRepository.createCinema(cinema);
+    }
+
+    public Cinema deleteCinema(Long id) {
+        return mockCinemaRepository.deleteCinema(id);
+    }
 }

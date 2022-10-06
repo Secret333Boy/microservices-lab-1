@@ -19,4 +19,16 @@ public class MovieService {
     public Movie getMovieById(Long id) {
         return mockMovieRepository.getMovies().stream().filter(movie -> movie.getId().equals(id)).findFirst().orElseThrow();
     }
+
+    public Movie createMovie(Movie movie) {
+        return mockMovieRepository.createMovie(movie);
+    }
+
+    public Movie updateMovie(Movie movie) {
+        return mockMovieRepository.updateMovie(movie);
+    }
+
+    public Movie deleteMovie(Long id) {
+        return mockMovieRepository.deleteMovie(id);
+    }
 }

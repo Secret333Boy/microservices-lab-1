@@ -24,4 +24,16 @@ public class HallService {
     public Hall getHallById(Long id) {
         return mockHallRepository.getHalls().stream().filter(hall -> hall.getId().equals(id)).findFirst().orElseThrow();
     }
+
+    public Hall createHall(Hall hall) {
+        return mockHallRepository.createHall(hall);
+    }
+
+    public Hall updateHall(Hall hall) {
+        return mockHallRepository.updateHall(hall);
+    }
+
+    public Hall deleteHall(Long id) {
+        return mockHallRepository.deleteHall(id);
+    }
 }

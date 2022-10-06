@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/halls")
+@RequestMapping("/api/halls")
 @RequiredArgsConstructor
 public class HallController {
 
@@ -25,5 +25,20 @@ public class HallController {
             return hallService.getAllHalls();
         }
         return hallService.getAllHallsOfCinema(cinemaId);
+    }
+
+    @PostMapping
+    public Hall createHall(@RequestBody Hall hall) {
+        return hallService.createHall(hall);
+    }
+
+    @PutMapping
+    public Hall updateHall(@RequestBody Hall hall) {
+        return hallService.updateHall(hall);
+    }
+
+    @DeleteMapping("/{id}")
+    public Hall deleteHall(@PathVariable Long id) {
+        return hallService.deleteHall(id);
     }
 }
