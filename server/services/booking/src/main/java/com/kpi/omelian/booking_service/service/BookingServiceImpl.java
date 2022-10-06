@@ -2,6 +2,7 @@ package com.kpi.omelian.booking_service.service;
 
 import com.kpi.omelian.booking_service.dto.TicketDto;
 import com.kpi.omelian.booking_service.entity.Ticket;
+import com.kpi.omelian.booking_service.exception.NonExistedSessionError;
 import com.kpi.omelian.booking_service.exception.NonExistedTicketError;
 import com.kpi.omelian.booking_service.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
@@ -53,11 +54,10 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void removeBooking(Long bookingId) throws NonExistedTicketError {
-        Ticket ticket = ticketRepository.findById(bookingId).orElse(null);
-        if (ticket == null) {
+        if (!this.ticketRepository.existsById(bookingId)) {
             throw new NonExistedTicketError(NonExistedTicketError.ERROR_MESSAGE);
         }
-        ticketRepository.delete(ticket);
+        this.ticketRepository.deleteById(bookingId);
     }
 
 }
