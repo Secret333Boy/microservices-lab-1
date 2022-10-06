@@ -13,7 +13,7 @@ spec:
         app: email-pod
     spec:
       containers:
-        - image: zaranik/email_service:2.3
+        - image: zaranik/email_service:3.0
           name: email-container
           ports:
             - containerPort: 8083
