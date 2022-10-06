@@ -1,13 +1,13 @@
-package com.kpi.zaranik.third_service;
+package com.kpi.omelian.booking_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FirstServiceApplication {
+public class BookingServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FirstServiceApplication.class, args);
+		SpringApplication.run(BookingServiceApplication.class, args);
 	}
 
 }
