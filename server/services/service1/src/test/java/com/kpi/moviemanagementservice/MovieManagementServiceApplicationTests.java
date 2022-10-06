@@ -1,10 +1,10 @@
-package com.kpi.zaranik.first_service;
+package com.kpi.moviemanagementservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FirstServiceApplicationTests {
+class MovieManagementServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
