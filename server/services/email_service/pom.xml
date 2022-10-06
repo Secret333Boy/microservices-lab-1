@@ -49,6 +49,12 @@
 			<version>${springdoc-openapi-ui.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.simplejavamail</groupId>
+			<artifactId>simple-java-mail</artifactId>
+			<version>6.7.4</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
