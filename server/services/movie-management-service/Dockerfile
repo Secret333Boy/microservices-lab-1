@@ -4,10 +4,12 @@ WORKDIR app
 
 COPY pom.xml /app/pom.xml
 
+RUN ["mvn", "verify", "clean", "--fail-never"]
+
 COPY src /app/src
 
 EXPOSE 8081
 
-RUN ["mvn", "clean", "package"]
+RUN ["mvn", "package"]
 
 CMD ["mvn", "spring-boot:run"]
