@@ -26,17 +26,17 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Ticket> getAllTicketsByUserId(Long userId) {
-        return null;
+        return this.ticketRepository.findByUserId(userId).orElse(null);
     }
 
     @Override
     public List<Ticket> getAllTicketsBySessionId(Long sessionId) {
-        return null;
+        return this.ticketRepository.findBySessionId(sessionId).orElse(null);
     }
 
     @Override
     public List<Ticket> getAllTicketsByPlaceId(Long placeId) {
-        return null;
+        return this.ticketRepository.findByPlaceId(placeId).orElse(null);
     }
 
     @Override
