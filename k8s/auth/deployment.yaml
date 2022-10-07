@@ -19,7 +19,7 @@ spec:
             - containerPort: 8082
           env:
             - name: GATEWAY_URL
-              value: "http://localhost:80"
+              value: "http://192.168.49.2:80"
             - name: PASSWORD_SALT
               valueFrom:
                 secretKeyRef:
@@ -52,5 +52,5 @@ spec:
                   key: POSTGRES_PASSWORD
           resources:
             limits:
-              memory: "128Mi"
+              memory: "1Gi"
               cpu: "500m"

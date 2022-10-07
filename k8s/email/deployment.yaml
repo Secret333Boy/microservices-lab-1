@@ -19,5 +19,5 @@ spec:
             - containerPort: 8083
           resources:
             limits:
-              memory: "128Mi"
+              memory: "1Gi"
               cpu: "500m"
