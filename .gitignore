@@ -4,3 +4,4 @@ node_modules
 .idea
 **/secrets/**
 target
+k8s/auth/auth.secrets.yaml
