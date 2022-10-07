@@ -15,40 +15,7 @@ const MoviesPage = () => {
       setMovies(await response.json());
       console.log();
     };
-    //getMovies();
-    setMovies([
-      {
-        id: 1,
-        name: "Movie 1",
-        description: "Description of movie 1",
-      },
-      {
-        id: 2,
-        name: "Movie 2",
-        description: "Description of movie 2",
-      },
-      {
-        id: 1,
-        name: "Movie 1",
-        description: "Description of movie 1",
-      },
-      {
-        id: 2,
-        name: "Movie 2",
-        description: "Description of movie 2",
-      }, 
-      {
-        id: 1,
-        name: "Movie 1",
-        description: "Description of movie 1",
-      },
-      {
-        id: 2,
-        name: "Movie 2",
-        description: "Description of movie 2",
-      },
-       
-    ]);
+    getMovies();
   }, []);
 
   return (

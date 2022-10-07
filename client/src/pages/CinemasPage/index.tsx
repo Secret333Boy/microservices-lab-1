@@ -6,48 +6,14 @@ import Movie from "../../components/Movie";
 
 const CinemasPage = () => {
   interface cinema {id:number, name:string, location:string};
-  const [movies, setMovies] = useState<cinema[]>([]);
+  const [cinemas, setCinemas] = useState<cinema[]>([]);
 
   useEffect(() => {
-    const getMovies = async () => {
-      const response = await fetch("http://192.168.49.2/api/movies");
-      setMovies(await response.json());
-      console.log();
+    const getCinemas = async () => {
+      const response = await fetch("http://192.168.49.2/api/cinemas");
+      setCinemas(await response.json());
     };
-    //getMovies();
-    setMovies([
-      {
-        id: 1,
-        name: "Movie 1",
-        location: "Description of movie 1",
-      },
-      {
-        id: 2,
-        name: "Movie 2",
-        location: "Description of movie 2",
-      },
-      {
-        id: 1,
-        name: "Movie 1",
-        location: "Description of movie 1",
-      },
-      {
-        id: 2,
-        name: "Movie 2",
-        location: "Description of movie 2",
-      }, 
-      {
-        id: 1,
-        name: "Movie 1",
-        location: "Description of movie 1",
-      },
-      {
-        id: 2,
-        name: "Movie 2",
-        location: "Description of movie 2",
-      },
-       
-    ]);
+    getCinemas();
   }, []);
 
   return (
@@ -59,7 +25,7 @@ const CinemasPage = () => {
       </div>
       
       <div className="movie-container">
-        {movies.map(({ id, name, location }) => (
+        {cinemas.map(({ id, name, location }) => (
           <Movie key={id} name={name} description={location} id={id} />
         ))}
       </div>
