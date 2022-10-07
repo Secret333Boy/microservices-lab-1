@@ -13,7 +13,7 @@ spec:
         app: client-pod
     spec:
       containers:
-        - image: secret333boy/client:1.0
+        - image: zaranik/client:5.0
           name: client-container
           ports:
             - containerPort: 80
