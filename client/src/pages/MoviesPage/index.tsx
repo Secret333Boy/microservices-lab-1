@@ -1,5 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import "../page.css";
+import "../../custom-button.css";
 
 const MoviesPage = () => {
   return (
@@ -7,6 +9,6 @@ const MoviesPage = () => {
       <Link to="/">To home</Link>MoviesPage
     </div>
   );
-}
+};
 
 export default MoviesPage;
