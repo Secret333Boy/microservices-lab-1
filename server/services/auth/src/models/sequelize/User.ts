@@ -4,7 +4,7 @@
 
 import { DataTypes } from 'sequelize';
 import IUser from '../interfaces/User';
-import db from '../../repository/memorySequelize';
+import db from '../../repository/sequelize';
 
 const User = db.define<IUser>('User', {
   id: {

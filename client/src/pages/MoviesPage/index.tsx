@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "../page.css";
 import "../../custom-button.css";
 import Movie from "../../components/Movie";
-import { Interface } from "readline";
 
 const MoviesPage = () => {
   interface movie {id:number, name:string, description:string};
@@ -11,7 +10,7 @@ const MoviesPage = () => {
 
   useEffect(() => {
     const getMovies = async () => {
-      const response = await fetch("http://192.168.49.2/api/movies");
+      const response = await fetch(`${process.env.REACT_APP_GATEWAY_URL || "http://localhost:80"}/api/movies`);
       setMovies(await response.json());
       console.log();
     };

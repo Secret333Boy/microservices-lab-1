@@ -13,13 +13,13 @@ spec:
         app: auth-pod
     spec:
       containers:
-        - image: secret333boy/auth:1.5
+        - image: secret333boy/auth:1.7
           name: auth-container
           ports:
             - containerPort: 8082
           env:
             - name: GATEWAY_URL
-              value: "http://192.168.49.2:80"
+              value: "http://localhost:80"
             - name: PASSWORD_SALT
               valueFrom:
                 secretKeyRef:

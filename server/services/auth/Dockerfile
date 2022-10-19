@@ -1,10 +1,12 @@
 FROM node:18-alpine
 
-WORKDIR /src
+WORKDIR /app
 
-COPY . .
+COPY ["package.json", "package-lock.json*", "tsoa.json", "tsconfig.json", "./"]
 
-RUN npm i
+RUN npm install
+
+COPY ./src ./src
 
 RUN npm run build
 

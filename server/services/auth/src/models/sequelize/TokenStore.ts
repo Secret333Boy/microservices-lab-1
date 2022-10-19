@@ -4,7 +4,7 @@
 
 import { DataTypes } from 'sequelize';
 import ITokenStore from '../interfaces/TokenStore';
-import db from '../../repository/memorySequelize';
+import db from '../../repository/sequelize';
 
 const TokenStore = db.define<ITokenStore>('TokenStore', {
   id: {

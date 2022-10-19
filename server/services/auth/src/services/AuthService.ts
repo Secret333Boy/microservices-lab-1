@@ -3,7 +3,7 @@
  */
 
 import bcrypt from "bcrypt";
-import sequelize from "../repository/memorySequelize";
+import sequelize from "../repository/sequelize";
 import TokenService from "./TokenService";
 import User from "../models/sequelize/User";
 import UserDTO from "../models/interfaces/UserDTO";

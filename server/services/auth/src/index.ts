@@ -2,7 +2,7 @@
  * @author Eugene Pashkovsky <pashkovskiy.eugen@gmail.com>
  */
 
-import db from './repository/memorySequelize';
+import db from './repository/sequelize';
 import app from './app';
 import { Server } from 'http';
 import { Socket } from 'net';

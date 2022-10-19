@@ -10,7 +10,7 @@ const CinemasPage = () => {
 
   useEffect(() => {
     const getCinemas = async () => {
-      const response = await fetch("http://192.168.49.2/api/cinemas");
+      const response = await fetch(`${process.env.REACT_APP_GATEWAY_URL || "http://localhost:80"}/api/cinemas`);
       setCinemas(await response.json());
     };
     getCinemas();
