@@ -8,10 +8,10 @@ import java.util.List;
 @Data
 public class ValidationExceptionResponse {
 
-    private List<Violation> violations;
+  private List<Violation> violations;
 
-    public ValidationExceptionResponse(List<Violation> violations) {
-        this.violations = violations;
-    }
+  public ValidationExceptionResponse(List<Violation> violations) {
+    this.violations = violations;
+  }
 
 }

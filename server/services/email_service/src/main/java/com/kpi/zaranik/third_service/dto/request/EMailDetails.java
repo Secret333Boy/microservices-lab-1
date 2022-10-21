@@ -16,15 +16,15 @@ import javax.validation.constraints.Size;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class EMailDetails {
 
-    @Email
-    @NotNull
-    private String emailTo;
+  @Email
+  @NotNull
+  private String emailTo;
 
-    @NotNull(message = "caption of message must not be omitted")
-    @Size(min = 5, message = "caption must not be less than 5 symbols")
-    private String caption;
+  @NotNull(message = "caption of message must not be omitted")
+  @Size(min = 5, message = "caption must not be less than 5 symbols")
+  private String caption;
 
-    @NotNull(message = "caption of message must not be omitted")
-    private String messageBody;
+  @NotNull(message = "caption of message must not be omitted")
+  private String messageBody;
 
 }

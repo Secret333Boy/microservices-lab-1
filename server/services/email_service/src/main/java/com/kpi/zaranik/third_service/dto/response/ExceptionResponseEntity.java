@@ -12,14 +12,14 @@ import static com.kpi.zaranik.third_service.Constants.SwaggerDescriptions.ERROR_
 @Data
 public final class ExceptionResponseEntity {
 
-    @Schema(description = ERROR_MESSAGE)
-    private final String message;
+  @Schema(description = ERROR_MESSAGE)
+  private final String message;
 
-    @Schema(description = ERROR_CAUSED_TIME)
-    private final LocalDateTime exceptionCauseTime;
+  @Schema(description = ERROR_CAUSED_TIME)
+  private final LocalDateTime exceptionCauseTime;
 
-    public ExceptionResponseEntity(String message) {
-        this.message = message;
-        this.exceptionCauseTime = LocalDateTime.now();
-    }
+  public ExceptionResponseEntity(String message) {
+    this.message = message;
+    this.exceptionCauseTime = LocalDateTime.now();
+  }
 }
