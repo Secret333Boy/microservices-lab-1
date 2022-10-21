@@ -12,8 +12,28 @@ spec:
       labels:
         app: auth-pod
     spec:
+      initContainers:
+        - name: auth-migration
+          image: secret333boy/auth-migrations:1.2
+          command: ["db-migrate", "up", "--config", "database.json", "-e", "prod"]
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: auth-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: auth-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: auth-secret
+                  key: POSTGRES_PASSWORD
       containers:
-        - image: secret333boy/auth:1.7
+        - image: secret333boy/auth:1.8
           name: auth-container
           ports:
             - containerPort: 8082
