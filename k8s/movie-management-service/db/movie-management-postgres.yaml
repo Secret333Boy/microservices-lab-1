@@ -1,24 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: movie-management-deployment
-  labels:
-    app: movie-management-deployment
+  name: movie-management-postgres-deployment
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      app: movie-management-pod
+      app: movie-management-postgres-pod
   template:
     metadata:
       labels:
-        app: movie-management-pod
+        app: movie-management-postgres-pod
     spec:
       containers:
-        - image: 96223961382/movie-management-service:2.1
-          name: movie-management-container
+        - name: movie-management-container
+          image: postgres:14.1-alpine3.15
+          imagePullPolicy: "IfNotPresent"
           ports:
-            - containerPort: 8081
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-db
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
           env:
             - name: POSTGRES_DB
               valueFrom:
@@ -35,7 +40,7 @@ spec:
                 secretKeyRef:
                   name: movie-management-secret
                   key: POSTGRES_PASSWORD
-          resources:
-            limits:
-              memory: "500Mi"
-              cpu: "500m"
+      volumes:
+        - name: postgres-db
+          persistentVolumeClaim:
+            claimName: movie-management-service-claim
