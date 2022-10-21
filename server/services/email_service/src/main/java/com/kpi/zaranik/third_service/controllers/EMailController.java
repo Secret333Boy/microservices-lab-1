@@ -1,6 +1,7 @@
 package com.kpi.zaranik.third_service.controllers;
 
 import com.kpi.zaranik.third_service.dto.request.ActivationDetails;
+import com.kpi.zaranik.third_service.dto.request.DelayedEMailDetails;
 import com.kpi.zaranik.third_service.dto.request.EMailDetails;
 import com.kpi.zaranik.third_service.services.MailService;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +31,9 @@ public class EMailController {
     return mailService.sendEMail(eMailDetails);
   }
 
-
+  @PostMapping("/send-delayed")
+  public String sendDelayedEMail(@RequestBody @Valid DelayedEMailDetails details) {
+    mailService.registerDelayedMessage(details);
+    return "successfully registered message";
+  }
 }
