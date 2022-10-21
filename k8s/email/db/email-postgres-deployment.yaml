@@ -1,22 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: email-deployment
+  name: email-postgres-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: email-pod
+      app: email-postgres-pod
   template:
     metadata:
       labels:
-        app: email-pod
+        app: email-postgres-pod
     spec:
       containers:
-        - image: secret333boy/email_service:3.4
-          name: email-container
+        - name: email-postgres-container
+          image: postgres:14.1-alpine3.15
+          imagePullPolicy: "IfNotPresent"
           ports:
-            - containerPort: 8083
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb
           resources:
             limits:
               memory: "1Gi"
@@ -37,13 +41,7 @@ spec:
                 secretKeyRef:
                   name: email-secret
                   key: POSTGRES_PASSWORD
-            - name: FROM_EMAIL_VALUE
-              valueFrom:
-                secretKeyRef:
-                  name: email-secret
-                  key: FROM_EMAIL_VALUE
-            - name: EMAIL_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: email-secret
-                  key: EMAIL_KEY                  
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: email-postgres-volume-claim
