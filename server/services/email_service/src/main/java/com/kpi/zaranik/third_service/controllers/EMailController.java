@@ -16,19 +16,19 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class EMailController {
 
-    private final MailService mailService;
+  private final MailService mailService;
 
-    @PostMapping("/send")
-    public String sendEMail(@RequestBody @Valid EMailDetails details){
-        return mailService.sendEMail(details);
-    }
+  @PostMapping("/send")
+  public String sendEMail(@RequestBody @Valid EMailDetails details) {
+    return mailService.sendEMail(details);
+  }
 
-    @PostMapping("/send-activation")
-    public String sendEMail(@RequestBody @Valid ActivationDetails details){
-        EMailDetails eMailDetails = new EMailDetails(details.getEmailTo(), "Movie Booking Activation", details.getActivationLink());
-        return mailService.sendEMail(eMailDetails);
-    }
-
+  @PostMapping("/send-activation")
+  public String sendEMail(@RequestBody @Valid ActivationDetails details) {
+    EMailDetails eMailDetails = new EMailDetails(details.getEmailTo(), "Movie Booking Activation",
+        details.getActivationLink());
+    return mailService.sendEMail(eMailDetails);
+  }
 
 
 }

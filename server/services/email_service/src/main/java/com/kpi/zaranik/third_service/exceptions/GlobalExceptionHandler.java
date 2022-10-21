@@ -13,22 +13,22 @@ import java.util.List;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(BindException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ValidationExceptionResponse methodArgumentNotValidExceptionHandle(BindException exception) {
-        List<Violation> violations = exception.getAllErrors().stream()
-                .map(objectError -> {
-                    String fieldName = ((FieldError) objectError).getField();
-                    String defaultMessage = objectError.getDefaultMessage();
-                    return new Violation(fieldName, defaultMessage);
-                }).toList();
-        return new ValidationExceptionResponse(violations);
-    }
+  @ExceptionHandler(BindException.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public ValidationExceptionResponse methodArgumentNotValidExceptionHandle(BindException exception) {
+    List<Violation> violations = exception.getAllErrors().stream()
+        .map(objectError -> {
+          String fieldName = ((FieldError) objectError).getField();
+          String defaultMessage = objectError.getDefaultMessage();
+          return new Violation(fieldName, defaultMessage);
+        }).toList();
+    return new ValidationExceptionResponse(violations);
+  }
 
-    @ExceptionHandler(MailSendingFailedException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ExceptionResponseEntity mailSendingFailedException(){
-        return new ExceptionResponseEntity("sending e-mail failed for some reason, try later");
-    }
+  @ExceptionHandler(MailSendingFailedException.class)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  public ExceptionResponseEntity mailSendingFailedException() {
+    return new ExceptionResponseEntity("sending e-mail failed for some reason, try later");
+  }
 
 }

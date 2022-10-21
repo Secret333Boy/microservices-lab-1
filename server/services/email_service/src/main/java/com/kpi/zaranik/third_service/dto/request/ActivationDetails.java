@@ -15,11 +15,11 @@ import javax.validation.constraints.NotNull;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ActivationDetails {
 
-    @Email
-    @NotNull
-    private String emailTo;
+  @Email
+  @NotNull
+  private String emailTo;
 
-    @NotNull(message = "caption of message must not be omitted")
-    private String activationLink;
+  @NotNull(message = "caption of message must not be omitted")
+  private String activationLink;
 
 }
