@@ -12,8 +12,6 @@ import Validator from "../utils/Validator";
 import ApiError from "../models/ApiError";
 import { request } from "undici";
 
-if (!process.env.EMAIL_SERVICE_HOST || !process.env.EMAIL_SERVICE_PORT)
-  throw new Error("Kubernetes: email service unknown");
 const emailURL = `http://${process.env.EMAIL_SERVICE_HOST}:${process.env.EMAIL_SERVICE_PORT}/api/email/send-activation`;
 export default class AuthService {
   private tokenService: TokenService = new TokenService();

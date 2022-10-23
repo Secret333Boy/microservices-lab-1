@@ -1,0 +1,22 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="zaranik" id="changelog-1.0" >
+        <createTable tableName="delayed_messages">
+            <column name="id" type="bigserial" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="caption" type="varchar(255)"/>
+            <column name="email_to" type="varchar(255)"/>
+            <column name="message_body" type="varchar(255)"/>
+            <column name="when_to_send_millis" type="timestamp"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="delayed_messages"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
