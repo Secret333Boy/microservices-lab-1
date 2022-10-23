@@ -2,7 +2,4 @@
 build
 node_modules
 .idea
-**/secrets/**
 target
-k8s/auth/auth.secrets.yaml
-k8s/movie-management-service/secrets/movie-management-secrets.yaml
