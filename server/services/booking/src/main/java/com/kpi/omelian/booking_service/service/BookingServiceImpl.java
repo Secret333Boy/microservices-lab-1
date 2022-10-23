@@ -11,9 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import lombok.AllArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class BookingServiceImpl implements BookingService {
 
     private TicketRepository ticketRepository;
@@ -42,14 +43,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Ticket bookSeat(TicketDto ticketDto) {
         Ticket ticket = modelMapper.map(ticketDto, Ticket.class);
-        // return this.ticketRepository.save(ticket);
-        return new Ticket(
-                1L,
-                20.0,
-                1L,
-                2L,
-                3L
-        );
+        return this.ticketRepository.save(ticket);
     }
 
     @Override
