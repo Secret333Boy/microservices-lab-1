@@ -3,7 +3,7 @@ package com.kpi.omelian.booking_service.controller;
 import com.kpi.omelian.booking_service.dto.TicketDto;
 import com.kpi.omelian.booking_service.entity.Ticket;
 import com.kpi.omelian.booking_service.exception.NonExistedTicketError;
-import com.kpi.omelian.booking_service.service.BookingService;
+import com.kpi.omelian.booking_service.service.IBookingService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/book")
 public class BookingController {
 
-    private final BookingService bookingService;
+    private final IBookingService bookingService;
     private final ModelMapper modelMapper;
 
     @GetMapping

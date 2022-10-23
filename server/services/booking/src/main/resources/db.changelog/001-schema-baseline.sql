@@ -1,0 +1,4 @@
+create table product (
+    id int primary key,
+    name varchar(255)
+);

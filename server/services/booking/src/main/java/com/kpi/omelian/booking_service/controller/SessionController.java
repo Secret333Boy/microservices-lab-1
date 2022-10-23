@@ -3,11 +3,9 @@ package com.kpi.omelian.booking_service.controller;
 import com.kpi.omelian.booking_service.dto.SessionDto;
 import com.kpi.omelian.booking_service.dto.TicketDto;
 import com.kpi.omelian.booking_service.entity.Session;
-import com.kpi.omelian.booking_service.entity.Ticket;
 import com.kpi.omelian.booking_service.exception.NonExistedSessionError;
-import com.kpi.omelian.booking_service.service.SessionService;
+import com.kpi.omelian.booking_service.service.ISessionService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +20,7 @@ import java.util.List;
 @RequestMapping("/session")
 public class SessionController {
 
-    private final SessionService sessionService;
+    private final ISessionService sessionService;
     private final ModelMapper modelMapper;
 
     @GetMapping

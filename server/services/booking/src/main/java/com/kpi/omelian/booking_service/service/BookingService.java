@@ -3,21 +3,52 @@ package com.kpi.omelian.booking_service.service;
 import com.kpi.omelian.booking_service.dto.TicketDto;
 import com.kpi.omelian.booking_service.entity.Ticket;
 import com.kpi.omelian.booking_service.exception.NonExistedTicketError;
+import com.kpi.omelian.booking_service.repository.TicketRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import lombok.AllArgsConstructor;
 
-public interface BookingService {
+@Service
+@AllArgsConstructor
+public class BookingService implements IBookingService {
 
-    List<Ticket> getAllTickets();
+    private final TicketRepository ticketRepository;
+    private final ModelMapper modelMapper;
 
-    List<Ticket> getAllTicketsByUserId(Long userId);
+    @Override
+    public List<Ticket> getAllTickets() {
+        return this.ticketRepository.findAll();
+    }
 
-    List<Ticket> getAllTicketsBySessionId(Long sessionId);
+    @Override
+    public List<Ticket> getAllTicketsByUserId(Long userId) {
+        return this.ticketRepository.findByUserId(userId).orElse(null);
+    }
 
-    List<Ticket> getAllTicketsByPlaceId(Long placeId);
+    @Override
+    public List<Ticket> getAllTicketsBySessionId(Long sessionId) {
+        return this.ticketRepository.findBySessionId(sessionId).orElse(null);
+    }
 
-    Ticket bookSeat(TicketDto ticketDto);
+    @Override
+    public List<Ticket> getAllTicketsByPlaceId(Long placeId) {
+        return this.ticketRepository.findByPlaceId(placeId).orElse(null);
+    }
 
-    void removeBooking(Long bookingId) throws NonExistedTicketError;
+    @Override
+    public Ticket bookSeat(TicketDto ticketDto) {
+        Ticket ticket = modelMapper.map(ticketDto, Ticket.class);
+        return this.ticketRepository.save(ticket);
+    }
+
+    @Override
+    public void removeBooking(Long bookingId) throws NonExistedTicketError {
+        if (!this.ticketRepository.existsById(bookingId)) {
+            throw new NonExistedTicketError(NonExistedTicketError.ERROR_MESSAGE);
+        }
+        this.ticketRepository.deleteById(bookingId);
+    }
 
 }
