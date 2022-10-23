@@ -38,7 +38,7 @@ public class HallController {
     }
 
     @DeleteMapping("/{id}")
-    public Hall deleteHall(@PathVariable Long id) {
-        return hallService.deleteHall(id);
+    public void deleteHall(@PathVariable Long id) {
+        hallService.deleteHall(id);
     }
 }
