@@ -4,9 +4,8 @@ import com.kpi.omelian.booking_service.dto.TicketDto;
 import com.kpi.omelian.booking_service.entity.Ticket;
 import com.kpi.omelian.booking_service.exception.NonExistedTicketError;
 import com.kpi.omelian.booking_service.service.BookingService;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,13 +15,13 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
-@RequiredArgsConstructor
+@Controller
+@AllArgsConstructor
 @RequestMapping("/book")
 public class BookingController {
 
-    private BookingService bookingService;
-    private ModelMapper modelMapper;
+    private final BookingService bookingService;
+    private final ModelMapper modelMapper;
 
     @GetMapping
     public List<TicketDto> getAll() {

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: booking-pg-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: booking-pg-pod
+  template:
+    metadata:
+      labels:
+        app: booking-pg-pod
+    spec:
+      containers:
+        - name: booking-pg-container
+          image: postgres:14.1-alpine3.15
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+            - secretRef:
+              name: postgres-secret
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: booking-pg-volume-claim

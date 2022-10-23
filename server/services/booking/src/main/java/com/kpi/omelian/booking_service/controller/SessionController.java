@@ -6,22 +6,24 @@ import com.kpi.omelian.booking_service.entity.Session;
 import com.kpi.omelian.booking_service.entity.Ticket;
 import com.kpi.omelian.booking_service.exception.NonExistedSessionError;
 import com.kpi.omelian.booking_service.service.SessionService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController
-@RequiredArgsConstructor
+@Controller
+@AllArgsConstructor
 @RequestMapping("/session")
 public class SessionController {
 
-    private SessionService sessionService;
-    private ModelMapper modelMapper;
+    private final SessionService sessionService;
+    private final ModelMapper modelMapper;
 
     @GetMapping
     public List<TicketDto> getAll() {
