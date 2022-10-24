@@ -1,5 +1,13 @@
 # microservices-labs
 
+## Who made services
+Команда №0
+1. Auth service - Pashkovskiy Eugene IP-01
+2. Movie-Manage Service - Moskalenko Vladislav IP-01
+3. Booking Service - Omelyan Dmytro IP-02
+4. Email Service - Bogdan Zaranik IP-01
+
+## Main pipeline
 Run scripts:
 
 k apply -f ./auth/secrets
@@ -22,21 +30,24 @@ k apply -f ./movie-management-service
 Now auth and email service work nice together.
 Other services also work, but they are on the dev stage and might be issues with them.
 
-Testing.
+## Testing
 After starting the app:
-1) Register in system
+1. Register in system
     POST http://localhost/api/auth/register
     {
         "email" : "your-email",
         "password": "Ab#432143215"
     }
 
-2) Go to your email account and follow the link. You will see nothing, but on backend 
+2. Go to your email account and follow the link. You will see nothing, but on backend 
 your account will be verified.
 
-3) You may login
+3. You may login
     POST http://localhost/api/auth/login
     {
         "email" : "your-email",
         "password": "Ab#432143215"
     }
+
+4. Email Service works internally (even does not have ingress. it is not needded
+hence is used only by auth service).
