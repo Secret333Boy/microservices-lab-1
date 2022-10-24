@@ -1,4 +1,4 @@
-package com.kpi.omelian.booking_service.dto;
+package com.kpi.omelian.booking_service.entity.dto;
 
 import lombok.Data;
 

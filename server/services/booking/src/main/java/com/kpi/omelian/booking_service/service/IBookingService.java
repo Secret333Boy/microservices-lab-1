@@ -1,6 +1,6 @@
 package com.kpi.omelian.booking_service.service;
 
-import com.kpi.omelian.booking_service.dto.TicketDto;
+import com.kpi.omelian.booking_service.entity.dto.TicketDto;
 import com.kpi.omelian.booking_service.entity.Ticket;
 import com.kpi.omelian.booking_service.exception.NonExistedTicketError;
 
