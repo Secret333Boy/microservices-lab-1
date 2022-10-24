@@ -4,16 +4,16 @@ import com.kpi.omelian.booking_service.dto.SessionDto;
 import com.kpi.omelian.booking_service.entity.Session;
 import com.kpi.omelian.booking_service.exception.NonExistedSessionError;
 import com.kpi.omelian.booking_service.repository.SessionRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SessionService implements ISessionService {
 
-    private final SessionRepository sessionRepository;
-    private final ModelMapper modelMapper;
+    private SessionRepository sessionRepository;
+    private ModelMapper modelMapper;
 
     @Override
     public Session save(SessionDto sessionDto) {

@@ -4,18 +4,18 @@ import com.kpi.omelian.booking_service.dto.TicketDto;
 import com.kpi.omelian.booking_service.entity.Ticket;
 import com.kpi.omelian.booking_service.exception.NonExistedTicketError;
 import com.kpi.omelian.booking_service.repository.TicketRepository;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BookingService implements IBookingService {
 
-    private final TicketRepository ticketRepository;
-    private final ModelMapper modelMapper;
+    private TicketRepository ticketRepository;
+    private ModelMapper modelMapper;
 
     @Override
     public List<Ticket> getAllTickets() {
