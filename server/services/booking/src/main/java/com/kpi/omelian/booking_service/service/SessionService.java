@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SessionService implements ISessionService {
 
-    private SessionRepository sessionRepository;
-    private ModelMapper modelMapper;
+    private final SessionRepository sessionRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public Session save(SessionDto sessionDto) {

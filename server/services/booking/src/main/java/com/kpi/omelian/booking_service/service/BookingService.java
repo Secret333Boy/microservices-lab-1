@@ -14,8 +14,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookingService implements IBookingService {
 
-    private TicketRepository ticketRepository;
-    private ModelMapper modelMapper;
+    private final TicketRepository ticketRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public List<Ticket> getAllTickets() {

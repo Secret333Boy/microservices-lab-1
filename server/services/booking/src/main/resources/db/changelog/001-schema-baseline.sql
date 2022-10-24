@@ -1,0 +1,24 @@
+-- liquibase formatted sql
+
+CREATE TABLE TICKET (
+    ID bigint NOT NULL,
+    PRICE decimal,
+    USER_ID bigint DEFAULT NULL,
+    SESSION_ID bigint,
+    PLACE_ID bigint,
+    CONSTRAINT PK_TICKET PRIMARY KEY (ID)
+);
+-- rollback DROP TABLE TICKET;
+
+CREATE TABLE SESSION (
+    ID bigint NOT NULL,
+    MOVIE_ID bigint,
+    HALL_ID bigint,
+    START_TIME date,
+    END_TIME date,
+    CONSTRAINT PK_SESSION PRIMARY KEY (ID)
+);
+-- rollback DROP TABLE SESSION;
+
+ALTER TABLE TICKET ADD CONSTRAINT FK_TICKET_ON_SESSION
+    FOREIGN KEY (SESSION_ID) REFERENCES SESSION (ID);
