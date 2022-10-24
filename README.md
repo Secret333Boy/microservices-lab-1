@@ -31,7 +31,7 @@ After starting the app:
         "password": "Ab#432143215"
     }
 
-2) Go to your email account and follow the link. You will see nothing, but on backaend 
+2) Go to your email account and follow the link. You will see nothing, but on backend 
 your account will be verified.
 
 3) You may login
