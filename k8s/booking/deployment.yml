@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: booking-service
-        image: dichikk/booking:1.0
+        image: zaranik/booking-service:1.0
         ports:
         - containerPort: 8084
