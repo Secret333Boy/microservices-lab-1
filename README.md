@@ -8,26 +8,31 @@
 4. Email Service - Bogdan Zaranik IP-01
 
 ## Main pipeline
-Run scripts:
+# Run scripts:
 
-k apply -f ./auth/secrets
-k apply -f ./auth/db
-k apply -f ./auth
+k apply -f ./email/secrets&k apply -f ./email/db&k apply -f ./email
 
-k apply -f ./email/secrets
-k apply -f ./email/db
-k apply -f ./email
+k apply -f ./auth/secrets&k apply -f ./auth/db&k apply -f ./auth
 
 k apply -f ./client
 
 k apply -f ./booking/postgres
 k apply -f ./booking
 
-k apply -f ./movie-management-service/secrets
-k apply -f ./movie-management-service/db
-k apply -f ./movie-management-service
+k apply -f ./movie-management-service/secrets&k apply -f ./movie-management-service/db&k apply -f ./movie-management-service
+
+# Delete scripts:
+
+k delete -f ./auth/secrets&k delete -f ./auth/db&k delete -f ./auth
+
+k delete -f ./email/secrets&k delete -f ./email/db&k delete -f ./email
+
+k delete -f ./client
+
+k delete -f ./movie-management-service/secrets&k delete -f ./movie-management-service/db&k delete -f ./movie-management-service
 
 Now auth and email service work nice together.
+Movie-management-service also works good
 Other services also work, but they are on the dev stage and might be issues with them.
 
 ## Testing

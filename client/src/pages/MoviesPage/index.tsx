@@ -4,15 +4,15 @@ import "../page.css";
 import "../../custom-button.css";
 import Movie from "../../components/Movie";
 
+
 const MoviesPage = () => {
   interface movie {id:number, name:string, description:string};
   const [movies, setMovies] = useState<movie[]>([]);
 
   useEffect(() => {
     const getMovies = async () => {
-      const response = await fetch(`${process.env.REACT_APP_GATEWAY_URL || "http://localhost:80"}/api/movies`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:80'}/api/movies`);
       setMovies(await response.json());
-      console.log();
     };
     getMovies();
   }, []);
