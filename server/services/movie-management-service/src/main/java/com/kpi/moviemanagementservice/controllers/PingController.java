@@ -1,12 +1,14 @@
 package com.kpi.moviemanagementservice.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/movie-management")
 public class PingController {
 
-    @GetMapping("/api/movie-management/ping")
+    @GetMapping("/ping")
     public String getResponse() {
         return "Hello from the movie management service";
     }
