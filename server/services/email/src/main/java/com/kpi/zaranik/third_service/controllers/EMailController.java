@@ -3,6 +3,7 @@ package com.kpi.zaranik.third_service.controllers;
 import com.kpi.zaranik.third_service.dto.request.ActivationDetails;
 import com.kpi.zaranik.third_service.dto.request.DelayedEMailDetails;
 import com.kpi.zaranik.third_service.dto.request.EMailDetails;
+import com.kpi.zaranik.third_service.dto.request.EMailWithImageDto;
 import com.kpi.zaranik.third_service.services.MailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,5 +37,10 @@ public class EMailController {
   public String sendDelayedEMail(@RequestBody @Valid DelayedEMailDetails details) {
     mailService.registerDelayedMessage(details);
     return "successfully registered message";
+  }
+
+  @PostMapping("/send/ticket")
+  public String sendEMailWithImage(@RequestBody @Valid EMailWithImageDto details) {
+    return mailService.sendEMailWithImage(details);
   }
 }
