@@ -11,7 +11,6 @@ import javax.validation.constraints.Min;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "ticket")
 public class Ticket {
 
     @Id
