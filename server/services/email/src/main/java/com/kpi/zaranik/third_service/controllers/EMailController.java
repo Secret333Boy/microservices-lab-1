@@ -24,8 +24,11 @@ public class EMailController {
 
   @PostMapping("/send-activation")
   public String sendEMail(@RequestBody @Valid ActivationDetails details) {
-    EMailDetails eMailDetails = new EMailDetails(details.getEmailTo(), "Movie Booking Activation",
-        details.getActivationLink());
+    EMailDetails eMailDetails = new EMailDetails(
+            details.getEmailTo(),
+            "Movie Booking Activation",
+        details.getActivationLink()
+    );
     return mailService.sendEMail(eMailDetails);
   }
 
