@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SessionService implements ISessionService {
@@ -19,6 +21,11 @@ public class SessionService implements ISessionService {
     public Session save(SessionDto sessionDto) {
         Session session = modelMapper.map(sessionDto, Session.class);
         return this.sessionRepository.save(session);
+    }
+
+    @Override
+    public List<Session> findAllSessions() {
+        return this.sessionRepository.findAll();
     }
 
     @Override
