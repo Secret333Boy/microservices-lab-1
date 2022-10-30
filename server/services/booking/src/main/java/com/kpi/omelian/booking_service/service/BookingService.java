@@ -1,7 +1,7 @@
 package com.kpi.omelian.booking_service.service;
 
-import com.kpi.omelian.booking_service.entity.dto.TicketDto;
 import com.kpi.omelian.booking_service.entity.Ticket;
+import com.kpi.omelian.booking_service.entity.dto.TicketDto;
 import com.kpi.omelian.booking_service.exception.NonExistedTicketError;
 import com.kpi.omelian.booking_service.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,8 @@ public class BookingService implements IBookingService {
 
     @Override
     public List<Ticket> getAllTickets() {
-        return this.ticketRepository.findAll();
+        Ticket ticket = new Ticket(1L, 10.0, 10L, 1L, 1L);
+        return List.of(ticket);
     }
 
     @Override

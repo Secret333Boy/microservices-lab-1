@@ -1,7 +1,7 @@
 package com.kpi.omelian.booking_service.controller;
 
-import com.kpi.omelian.booking_service.entity.dto.TicketDto;
 import com.kpi.omelian.booking_service.entity.Ticket;
+import com.kpi.omelian.booking_service.entity.dto.TicketDto;
 import com.kpi.omelian.booking_service.exception.NonExistedTicketError;
 import com.kpi.omelian.booking_service.service.IBookingService;
 import org.modelmapper.ModelMapper;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/api/booking/book")
 public class BookingController {
-// TODO integretion with user
+    // TODO integretion with user
     // TODO send email
     private final IBookingService bookingService;
     private final ModelMapper modelMapper;
@@ -30,10 +30,10 @@ public class BookingController {
     }
 
     @GetMapping
-    public List<TicketDto> getAll() {
-        return this.bookingService.getAllTickets().stream()
+    public ResponseEntity<List<TicketDto>> getAll() {
+        return ResponseEntity.ok(this.bookingService.getAllTickets().stream()
                 .map(ticket -> modelMapper.map(ticket, TicketDto.class))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     @PostMapping
