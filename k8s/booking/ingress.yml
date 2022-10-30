@@ -8,7 +8,7 @@ spec:
   rules:
     - http:
         paths:
-          - path: /api
+          - path: /api/booking
             pathType: "Prefix"
             backend:
               service:

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/session")
+@RequestMapping("/api/booking/session")
 public class SessionController {
 
     private final SessionService sessionService;

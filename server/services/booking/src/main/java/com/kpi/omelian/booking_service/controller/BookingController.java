@@ -16,9 +16,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/book")
+@RequestMapping("/api/booking/book")
 public class BookingController {
-
+// TODO integretion with user
+    // TODO send email
     private final IBookingService bookingService;
     private final ModelMapper modelMapper;
 
