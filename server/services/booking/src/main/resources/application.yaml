@@ -8,8 +8,13 @@ spring:
     password: admin
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-  liquibase:
-    change-log: db/changelog/db.changelog-master.xml
+  flyway:
+    baseline-on-migrate: true
+#    validateOnMigrate: false
+#    locations:
+#      - classpath:db/migration

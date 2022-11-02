@@ -6,16 +6,18 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "sessions")
 public class Session {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Min(value = 1, message = "Movie id can't be less than 1.")
@@ -24,8 +26,8 @@ public class Session {
     @Min(value = 1, message = "Hall id can't be less than 1.")
     private Long hallId;
 
-    private Date startTime;
+    private LocalDate startTime;
 
-    private Date endTime;
+    private LocalDate endTime;
 
 }

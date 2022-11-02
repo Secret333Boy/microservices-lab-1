@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -19,7 +20,7 @@ public class BookingService implements IBookingService {
 
     @Override
     public List<Ticket> getAllTickets() {
-        Ticket ticket = new Ticket(1L, 10.0, 10L, 1L, 1L);
+        Ticket ticket = new Ticket(1L, new BigDecimal(10.0), 10L, 1L, 1L);
         return List.of(ticket);
     }
 
