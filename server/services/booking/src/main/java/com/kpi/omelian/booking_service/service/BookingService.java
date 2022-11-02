@@ -20,8 +20,7 @@ public class BookingService implements IBookingService {
 
     @Override
     public List<Ticket> getAllTickets() {
-        Ticket ticket = new Ticket(1L, new BigDecimal(10.0), 10L, 1L, 1L);
-        return List.of(ticket);
+        return this.ticketRepository.findAll();
     }
 
     @Override
