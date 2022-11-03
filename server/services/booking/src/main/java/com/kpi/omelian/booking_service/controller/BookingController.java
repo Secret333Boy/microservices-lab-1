@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Controller
+@RestController
 @RequestMapping("/api/booking/book")
 public class BookingController {
     // TODO integretion with user

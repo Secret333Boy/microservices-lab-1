@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Controller
+@RestController
 @AllArgsConstructor
 @RequestMapping("/api/booking/session")
 public class SessionController {
