@@ -37,13 +37,9 @@ public class SessionController {
     }
 
     @DeleteMapping
-    public ResponseEntity<TicketDto> remove(@Valid @RequestBody Long sessionId) {
-        try {
-            this.sessionService.delete(sessionId);
-            return ResponseEntity.noContent().build();
-        } catch (NonExistedSessionError e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remove(@Valid @RequestBody Long sessionId) {
+        this.sessionService.delete(sessionId);
     }
 
 }

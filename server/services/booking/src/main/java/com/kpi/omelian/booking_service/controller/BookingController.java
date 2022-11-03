@@ -42,13 +42,9 @@ public class BookingController {
     }
 
     @DeleteMapping
-    public ResponseEntity<TicketDto> remove(@Valid @RequestBody Long ticketId) {
-        try {
-            this.bookingService.removeBooking(ticketId);
-            return ResponseEntity.noContent().build();
-        } catch (NonExistedTicketError e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remove(@Valid @RequestBody Long ticketId) {
+        this.bookingService.removeBooking(ticketId);
     }
 
 }
