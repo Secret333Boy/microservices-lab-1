@@ -30,15 +30,15 @@ public class BookingController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TicketDto>> getAll() {
-        return ResponseEntity.ok(this.bookingService.getAllTickets().stream()
+    public List<TicketDto> getAll() {
+        return this.bookingService.getAllTickets().stream()
                 .map(ticket -> modelMapper.map(ticket, TicketDto.class))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     @PostMapping
-    public ResponseEntity<Ticket> book(@Valid @RequestBody TicketDto ticketDto) {
-        return ResponseEntity.ok(this.bookingService.bookSeat(ticketDto));
+    public Ticket book(@Valid @RequestBody TicketDto ticketDto) {
+        return this.bookingService.bookSeat(ticketDto);
     }
 
     @DeleteMapping

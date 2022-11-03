@@ -32,8 +32,8 @@ public class SessionController {
     }
 
     @PostMapping
-    public ResponseEntity<Session> book(@Valid @RequestBody SessionDto sessionDto) {
-        return ResponseEntity.ok(this.sessionService.save(sessionDto));
+    public Session book(@Valid @RequestBody SessionDto sessionDto) {
+        return this.sessionService.save(sessionDto);
     }
 
     @DeleteMapping
