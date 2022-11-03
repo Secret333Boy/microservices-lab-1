@@ -4,7 +4,7 @@
 Команда №0
 1. Auth service - Pashkovskiy Eugene IP-01
 2. Movie-Manage Service - Moskalenko Vladislav IP-01
-3. Booking Service - Omelyan Dmytro IP-02
+3. Booking Service - Omelian Dmytro IP-02
 4. Email Service - Bogdan Zaranik IP-01
 
 ## Main pipeline
