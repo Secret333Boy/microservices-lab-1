@@ -45,15 +45,16 @@ public class SecurityAspect {
         httpHeaders.set(HttpHeaders.AUTHORIZATION, authorizationHeader);
         HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
 
-        ResponseEntity<String> authServiceResponse = restTemplate.exchange(
-                authServiceUrl,
-                HttpMethod.GET,
-                httpEntity,
-                String.class
-        );
-
-        if (authServiceResponse.getStatusCode() != HttpStatus.OK) {
-            sendUnauthorized(authServiceResponse.getBody());
+        ResponseEntity<String> authServiceResponse = null;
+        try {
+            authServiceResponse = restTemplate.exchange(
+                    authServiceUrl,
+                    HttpMethod.GET,
+                    httpEntity,
+                    String.class
+            );
+        }catch(Exception e){
+            sendUnauthorized("Unauthorized user are not allowed to permit this operation.");
             log.error("Authorized from another account, can't perform this request.");
             return;
         }

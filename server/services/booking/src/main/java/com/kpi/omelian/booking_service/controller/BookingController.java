@@ -1,5 +1,6 @@
 package com.kpi.omelian.booking_service.controller;
 
+import com.kpi.omelian.booking_service.aspect.SecuredEndpoint;
 import com.kpi.omelian.booking_service.entity.Ticket;
 import com.kpi.omelian.booking_service.entity.dto.TicketDto;
 import com.kpi.omelian.booking_service.exception.NonExistedTicketError;
@@ -29,6 +30,7 @@ public class BookingController {
         this.modelMapper = modelMapper;
     }
 
+    @SecuredEndpoint
     @GetMapping
     public List<TicketDto> getAll() {
         return this.bookingService.getAllTickets().stream()
@@ -36,6 +38,7 @@ public class BookingController {
                 .collect(Collectors.toList());
     }
 
+    @SecuredEndpoint
     @PostMapping
     public Ticket book(@Valid @RequestBody TicketDto ticketDto) {
         return this.bookingService.bookSeat(ticketDto);

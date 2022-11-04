@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: booking-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: booking-service-pod
+  template:
+    metadata:
+      labels:
+        app: booking-service-pod
+    spec:
+      containers:
+      - name: booking-service
+        image: zaranik/booking-service:1.53
+        ports:
+        - containerPort: 8084
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+          - name: POSTGRES_DB
+            valueFrom:
+              secretKeyRef:
+                name: booking-postgres-secret
+                key: POSTGRES_DB
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: booking-postgres-secret
+                key: POSTGRES_USER
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: booking-postgres-secret
+                key: POSTGRES_PASSWORD

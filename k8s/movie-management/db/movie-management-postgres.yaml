@@ -22,8 +22,8 @@ spec:
               name: postgres-db
           resources:
             limits:
-              memory: "1Gi"
-              cpu: "500m"
+              memory: "512Mi"
+              cpu: "250m"
           env:
             - name: POSTGRES_DB
               valueFrom:

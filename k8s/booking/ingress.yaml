@@ -12,6 +12,6 @@ spec:
             pathType: "Prefix"
             backend:
               service:
-                name: booking-management
+                name: booking-service
                 port:
                   number: 80
