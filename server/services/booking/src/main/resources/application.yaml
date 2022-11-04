@@ -18,3 +18,6 @@ spring:
 #    validateOnMigrate: false
 #    locations:
 #      - classpath:db/migration
+
+auth-service:
+  url: http://localhost:8081/api/auth/validate
