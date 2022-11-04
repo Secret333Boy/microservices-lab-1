@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Controller
+@RestController
 @AllArgsConstructor
 @RequestMapping("/api/booking/session")
 public class SessionController {
@@ -32,18 +32,14 @@ public class SessionController {
     }
 
     @PostMapping
-    public ResponseEntity<Session> book(@Valid @RequestBody SessionDto sessionDto) {
-        return ResponseEntity.ok(this.sessionService.save(sessionDto));
+    public Session book(@Valid @RequestBody SessionDto sessionDto) {
+        return this.sessionService.save(sessionDto);
     }
 
     @DeleteMapping
-    public ResponseEntity<TicketDto> remove(@Valid @RequestBody Long sessionId) {
-        try {
-            this.sessionService.delete(sessionId);
-            return ResponseEntity.noContent().build();
-        } catch (NonExistedSessionError e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remove(@Valid @RequestBody Long sessionId) {
+        this.sessionService.delete(sessionId);
     }
 
 }

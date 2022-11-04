@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Controller
+@RestController
 @RequestMapping("/api/booking/book")
 public class BookingController {
     // TODO integretion with user
@@ -30,25 +30,21 @@ public class BookingController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TicketDto>> getAll() {
-        return ResponseEntity.ok(this.bookingService.getAllTickets().stream()
+    public List<TicketDto> getAll() {
+        return this.bookingService.getAllTickets().stream()
                 .map(ticket -> modelMapper.map(ticket, TicketDto.class))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     @PostMapping
-    public ResponseEntity<Ticket> book(@Valid @RequestBody TicketDto ticketDto) {
-        return ResponseEntity.ok(this.bookingService.bookSeat(ticketDto));
+    public Ticket book(@Valid @RequestBody TicketDto ticketDto) {
+        return this.bookingService.bookSeat(ticketDto);
     }
 
     @DeleteMapping
-    public ResponseEntity<TicketDto> remove(@Valid @RequestBody Long ticketId) {
-        try {
-            this.bookingService.removeBooking(ticketId);
-            return ResponseEntity.noContent().build();
-        } catch (NonExistedTicketError e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remove(@Valid @RequestBody Long ticketId) {
+        this.bookingService.removeBooking(ticketId);
     }
 
 }
