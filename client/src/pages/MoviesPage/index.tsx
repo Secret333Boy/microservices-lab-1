@@ -11,7 +11,7 @@ const MoviesPage = () => {
 
   useEffect(() => {
     const getMovies = async () => {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:80'}/api/movies`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL || 'http://192.168.49.2:80'}/api/movie-management/movies`);
       setMovies(await response.json());
     };
     getMovies();

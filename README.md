@@ -72,7 +72,7 @@ your account will be verified.
 hence is used now by auth service).
 
 5. You may get all movies(also by id)
-    GET http://localhost/api/auth/movies
+    GET http://localhost/api/movie-management/movies
 
 6. You may get all cinames(also by id)
     GET http://localhost/api/movie-management/cinemas
