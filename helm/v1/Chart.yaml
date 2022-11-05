@@ -3,5 +3,5 @@ type: application
 version: 0.0.1
 name: main
 appVersion: "0.1"
-description: "Main file"
+description: "Main chart"
 

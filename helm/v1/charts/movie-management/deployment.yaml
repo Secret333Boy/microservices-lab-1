@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movie-management-deployment
+  labels:
+    app: movie-management-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: movie-management-pod
+  template:
+    metadata:
+      labels:
+        app: movie-management-pod
+    spec:
+      containers:
+        - image: 96223961382/movie-management-service:2.7
+          name: movie-management-container
+          ports:
+            - containerPort: 8081
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: movie-management-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: movie-management-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: movie-management-secret
+                  key: POSTGRES_PASSWORD
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
