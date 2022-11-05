@@ -18,4 +18,5 @@ public class ApiError {
     public static ApiError justCaused(String message){
         return new ApiError(message, LocalDateTime.now());
     }
+
 }
