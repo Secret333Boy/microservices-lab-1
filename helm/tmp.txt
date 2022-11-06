@@ -1,0 +1,579 @@
+---
+# Source: main/charts/auth/templates/secrets/auth.secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: release-name-auth-secret
+type: Opaque
+data:
+  PASSWORD_SALT: JDJiJDEwJG9rd3pXU0U4MmtlN1k4SDIudUF1dXU=
+  ACCESS_TOKEN_SECRET: QUNDRVNTX1RPS0VOX1NFQ1JFVA==
+  REFRESH_TOKEN_SECRET: UkVGUkVTSF9UT0tFTl9TRUNSRVQ=
+  POSTGRES_DB: cG9zdGdyZXM=
+  POSTGRES_USER: cG9zdGdyZXM=
+  POSTGRES_PASSWORD: cG9zdGdyZXM=
+---
+# Source: main/charts/email/templates/secrets/email.secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: release-name-email-secret
+type: Opaque
+data:
+  POSTGRES_DB: cG9zdGdyZXM=
+  POSTGRES_USER: cG9zdGdyZXM=
+  POSTGRES_PASSWORD: cG9zdGdyZXM=
+  FROM_EMAIL_VALUE: emFyYW5pa2J6QGdtYWlsLmNvbQ==
+  EMAIL_KEY: ZmNpZWJmc3dhbWlna3N4aQ==
+---
+# Source: main/charts/movie-management/templates/secrets/movie-management-secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: release-name-movie-management-secret
+type: Opaque
+data:
+  POSTGRES_DB: bW92aWUtbWFuYWdlbWVudA==
+  POSTGRES_USER: cG9zdGdyZXM=
+  POSTGRES_PASSWORD: cG9zdGdyZXM=
+---
+# Source: main/charts/auth/templates/db/auth-postgres-claim.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: release-name-auth-postgres-volume-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 512Mi
+---
+# Source: main/charts/email/templates/db/email-postgres-claim.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: release-name-email-postgres-volume-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 512Mi
+---
+# Source: main/charts/movie-management/templates/db/movie-management-postgres-claim.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: release-name-movie-management-service-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 512Mi
+---
+# Source: main/charts/auth/templates/db/auth-postgres-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name-auth-postgres
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: release-name-auth-postgres-pod
+---
+# Source: main/charts/auth/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name-auth
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8082
+  selector:
+    app: release-name-auth-pod
+---
+# Source: main/charts/client/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name-client
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    app: release-name-client-pod
+---
+# Source: main/charts/email/templates/db/email-postgres-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name-email-postgres
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: release-name-email-postgres-pod
+---
+# Source: main/charts/email/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name-email
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8083
+  selector:
+    app: release-name-email-pod
+---
+# Source: main/charts/movie-management/templates/db/movie-management-postgres-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name-movie-management-postgres
+spec:
+  selector:
+    app: release-name-movie-management-postgres-pod
+  ports:
+    - port: 5432
+---
+# Source: main/charts/movie-management/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: release-name-movie-management
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8081
+  selector:
+    app: release-name-movie-management-pod
+---
+# Source: main/charts/auth/templates/db/auth-postgres-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: release-name-auth-postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: release-name-auth-postgres-pod
+  template:
+    metadata:
+      labels:
+        app: release-name-auth-postgres-pod
+    spec:
+      containers:
+        - name: release-name-auth-postgres-container
+          image: postgres:14.1-alpine3.15
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-auth-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-auth-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-auth-secret
+                  key: POSTGRES_PASSWORD
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: release-name-auth-postgres-volume-claim
+---
+# Source: main/charts/auth/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: release-name-auth-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: release-name-auth-pod
+  template:
+    metadata:
+      labels:
+        app: release-name-auth-pod
+    spec:
+      initContainers:
+        - name: release-name-auth-migration
+          image: secret333boy/auth-migrations:1.2
+          command: ["db-migrate", "up", "--config", "database.json", "-e", "prod"]
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-auth-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-auth-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-auth-secret
+                  key: POSTGRES_PASSWORD
+      containers:
+        - image: secret333boy/auth:2.0
+          name: release-name-auth-container
+          ports:
+            - containerPort: 8082
+          env:
+            - name: GATEWAY_URL
+              value: "http://192.168.49.2:80"
+            - name: PASSWORD_SALT
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-auth-secret
+                  key: PASSWORD_SALT
+            - name: ACCESS_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-auth-secret
+                  key: ACCESS_TOKEN_SECRET
+            - name: REFRESH_TOKEN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-auth-secret
+                  key: REFRESH_TOKEN_SECRET
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-auth-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-auth-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-auth-secret
+                  key: POSTGRES_PASSWORD
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+---
+# Source: main/charts/client/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: release-name-client-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: release-name-client-pod
+  template:
+    metadata:
+      labels:
+        app: release-name-client-pod
+    spec:
+      containers:
+        - image: zaranik/client:5.0
+          name: release-name-client-container
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+---
+# Source: main/charts/email/templates/db/email-postgres-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: release-name-email-postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: release-name-email-postgres-pod
+  template:
+    metadata:
+      labels:
+        app: release-name-email-postgres-pod
+    spec:
+      containers:
+        - name: release-name-email-postgres-container
+          image: zaranik/email-service:3.1
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 250m
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-email-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-email-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-email-secret
+                  key: POSTGRES_PASSWORD
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: release-name-email-postgres-volume-claim
+---
+# Source: main/charts/email/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: release-name-email-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: release-name-email-pod
+  template:
+    metadata:
+      labels:
+        app: release-name-email-pod
+    spec:
+      containers:
+        - image: zaranik/email-service:3.1
+          name: release-name-email-container
+          ports:
+            - containerPort: 
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 250m
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-email-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-email-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-email-secret
+                  key: POSTGRES_PASSWORD
+            - name: FROM_EMAIL_VALUE
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-email-secret
+                  key: FROM_EMAIL_VALUE
+            - name: EMAIL_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-email-secret
+                  key: EMAIL_KEY
+---
+# Source: main/charts/movie-management/templates/db/movie-management-postgres.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: release-name-movie-management-postgres-deployment
+spec:
+  selector:
+    matchLabels:
+      app: release-name-movie-management-postgres-pod
+  template:
+    metadata:
+      labels:
+        app: release-name-movie-management-postgres-pod
+    spec:
+      containers:
+        - name: release-name-movie-management-container
+          image: postgres:14.1-alpine3.15
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-db
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-movie-management-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-movie-management-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-movie-management-secret
+                  key: POSTGRES_PASSWORD
+      volumes:
+        - name: postgres-db
+          persistentVolumeClaim:
+            claimName: release-name-movie-management-service-claim
+---
+# Source: main/charts/movie-management/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: release-name-movie-management-deployment
+  labels:
+    app: release-name-movie-management-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: release-name-movie-management-pod
+  template:
+    metadata:
+      labels:
+        app: release-name-movie-management-pod
+    spec:
+      containers:
+        - image: 96223961382/movie-management-service:2.7
+          name: release-name-movie-management-container
+          ports:
+            - containerPort: 8081
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-movie-management-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-movie-management-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: release-name-movie-management-secret
+                  key: POSTGRES_PASSWORD
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
+---
+# Source: main/charts/auth/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: release-name-auth-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /api/auth
+            pathType: "Prefix"
+            backend:
+              service:
+                name: release-name-auth
+                port:
+                  number: 80
+---
+# Source: main/charts/client/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: release-name-client-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: "Prefix"
+            backend:
+              service:
+                name: release-name-client
+                port:
+                  number: 80
+---
+# Source: main/charts/movie-management/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: release-name-movie-management-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /api/movie-management
+            pathType: "Prefix"
+            backend:
+              service:
+                name: release-name-movie-management
+                port:
+                  number: 80
+---
+# Source: main/charts/email/templates/ingress.yaml
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: myingress
+#   annotations:
+#     kubernetes.io/ingress.class: "nginx"
+#     nginx.ingress.kubernetes.io/use-regex: "true"
+# spec:
+#   rules:
+#     - http:
+#         paths:
+#           - path: /.*
+#             pathType: "Prefix"
+#             backend:
+#               service:
+#                 name: email
+#                 port:
+#                   number: 80

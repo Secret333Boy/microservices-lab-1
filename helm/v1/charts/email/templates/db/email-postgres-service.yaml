@@ -4,6 +4,6 @@ metadata:
   name: {{ .Release.Name }}-{{ .Chart.Name }}-postgres
 spec:
   ports:
-    - port: 5432
+    - port: {{ .Values.db.servicePort }}
   selector:
     app: {{ .Release.Name }}-{{ .Chart.Name }}-postgres-pod

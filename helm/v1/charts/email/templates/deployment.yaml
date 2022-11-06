@@ -13,14 +13,14 @@ spec:
         app: {{ .Release.Name }}-{{ .Chart.Name }}-pod
     spec:
       containers:
-        - image: zaranik/email-service:3.1
+        - image: {{ .Values.image.name }}
           name: {{ .Release.Name }}-{{ .Chart.Name }}-container
           ports:
-            - containerPort: 8083
+            - containerPort: {{ .Values.image.port }}
           resources:
             limits:
-              memory: "512Mi"
-              cpu: "250m"
+              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.limits.cpu }}
           env:
             - name: POSTGRES_DB
               valueFrom:

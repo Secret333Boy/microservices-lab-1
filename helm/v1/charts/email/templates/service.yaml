@@ -5,7 +5,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 80
-      targetPort: 8083
+    - port: {{ .Values.service.ports.port }}
+      targetPort: {{ .Values.service.ports.containerPort }}
   selector:
     app: {{ .Release.Name }}-{{ .Chart.Name }}-pod
