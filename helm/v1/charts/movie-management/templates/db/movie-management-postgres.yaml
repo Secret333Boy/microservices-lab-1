@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: movie-management-postgres-deployment
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-postgres-deployment
 spec:
   selector:
     matchLabels:
-      app: movie-management-postgres-pod
+      app: {{ .Release.Name }}-{{ .Chart.Name }}-postgres-pod
   template:
     metadata:
       labels:
-        app: movie-management-postgres-pod
+        app: {{ .Release.Name }}-{{ .Chart.Name }}-postgres-pod
     spec:
       containers:
-        - name: movie-management-container
+        - name: {{ .Release.Name }}-{{ .Chart.Name }}-container
           image: postgres:14.1-alpine3.15
           imagePullPolicy: "IfNotPresent"
           ports:
@@ -28,19 +28,19 @@ spec:
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: movie-management-secret
+                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
                   key: POSTGRES_DB
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: movie-management-secret
+                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
                   key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: movie-management-secret
+                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
                   key: POSTGRES_PASSWORD
       volumes:
         - name: postgres-db
           persistentVolumeClaim:
-            claimName: movie-management-service-claim
+            claimName: {{ .Release.Name }}-{{ .Chart.Name }}-service-claim

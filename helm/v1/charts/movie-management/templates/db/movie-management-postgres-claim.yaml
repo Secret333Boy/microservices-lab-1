@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: movie-management-service-claim
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-service-claim
 spec:
   accessModes:
     - ReadWriteOnce

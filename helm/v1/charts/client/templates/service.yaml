@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: client
+  name: {{ .Release.Name }}-{{ .Chart.Name }}
 spec:
   type: ClusterIP
   ports:
     - port: 80
       targetPort: 80
   selector:
-    app: client-pod
+    app: {{ .Release.Name }}-{{ .Chart.Name }}-pod

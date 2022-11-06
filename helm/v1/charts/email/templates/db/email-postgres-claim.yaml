@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: email-postgres-volume-claim
+  name: {{ .Release.Name }}-{{ .Chart.Name }}-postgres-volume-claim
 spec:
   accessModes:
     - ReadWriteOnce
