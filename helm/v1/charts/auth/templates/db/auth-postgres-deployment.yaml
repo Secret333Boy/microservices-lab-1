@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-postgres-container
-          image: {{ .Values.image.name }}
+          image: {{ .Values.db.image }}
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: {{ .Values.db.containerPort }}

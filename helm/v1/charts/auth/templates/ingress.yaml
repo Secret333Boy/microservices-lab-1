@@ -1,4 +1,3 @@
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -15,4 +14,6 @@ spec:
               service:
                 name: {{ .Chart.Name }}
                 port:
-                  number: {{ .Values.service.ports.port }}
+                  {{- range .Values.service.ports }}
+                    number: {{ .port }}
+                  {{- end }}
