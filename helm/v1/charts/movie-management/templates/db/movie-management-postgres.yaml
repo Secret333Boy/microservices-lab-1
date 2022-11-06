@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-{{ .Chart.Name }}-postgres-deployment
+  name: {{ .Chart.Name }}-postgres-deployment
 spec:
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-{{ .Chart.Name }}-postgres-pod
+      app: {{ .Chart.Name }}-postgres-pod
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-{{ .Chart.Name }}-postgres-pod
+        app: {{ .Chart.Name }}-postgres-pod
     spec:
       containers:
-        - name: {{ .Release.Name }}-{{ .Chart.Name }}-container
+        - name: {{ .Chart.Name }}-container
           image: postgres:14.1-alpine3.15
           imagePullPolicy: "IfNotPresent"
           ports:
@@ -28,19 +28,19 @@ spec:
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+                  name: {{ .Chart.Name }}-secret
                   key: POSTGRES_DB
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+                  name: {{ .Chart.Name }}-secret
                   key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+                  name: {{ .Chart.Name }}-secret
                   key: POSTGRES_PASSWORD
       volumes:
         - name: postgres-db
           persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-{{ .Chart.Name }}-service-claim
+            claimName: {{ .Chart.Name }}-service-claim

@@ -1,40 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-{{ .Chart.Name }}-deployment
+  name: {{ .Chart.Name }}-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-{{ .Chart.Name }}-pod
+      app: {{ .Chart.Name }}-pod
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-{{ .Chart.Name }}-pod
+        app: {{ .Chart.Name }}-pod
     spec:
       initContainers:
-        - name: {{ .Release.Name }}-{{ .Chart.Name }}-migration
+        - name: {{ .Chart.Name }}-migration
           image: secret333boy/auth-migrations:1.2
           command: ["db-migrate", "up", "--config", "database.json", "-e", "prod"]
           env:
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+                  name: {{ .Chart.Name }}-secret
                   key: POSTGRES_DB
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+                  name: {{ .Chart.Name }}-secret
                   key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+                  name: {{ .Chart.Name }}-secret
                   key: POSTGRES_PASSWORD
       containers:
         - image: secret333boy/auth:2.0
-          name: {{ .Release.Name }}-{{ .Chart.Name }}-container
+          name: {{ .Chart.Name }}-container
           ports:
             - containerPort: 8082
           env:
@@ -43,32 +43,32 @@ spec:
             - name: PASSWORD_SALT
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+                  name: {{ .Chart.Name }}-secret
                   key: PASSWORD_SALT
             - name: ACCESS_TOKEN_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+                  name: {{ .Chart.Name }}-secret
                   key: ACCESS_TOKEN_SECRET
             - name: REFRESH_TOKEN_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+                  name: {{ .Chart.Name }}-secret
                   key: REFRESH_TOKEN_SECRET
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+                  name: {{ .Chart.Name }}-secret
                   key: POSTGRES_DB
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+                  name: {{ .Chart.Name }}-secret
                   key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-{{ .Chart.Name }}-secret
+                  name: {{ .Chart.Name }}-secret
                   key: POSTGRES_PASSWORD
           resources:
             limits:

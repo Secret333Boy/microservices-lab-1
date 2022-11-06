@@ -6,12 +6,13 @@ selector:
 image:
   name: zaranik/email-service:3.1
   port: 8083
+
 service:
   ports:
-    name: http
-    port: 80
-    containerPort: 8083
-
+    - name: http
+      port: 80
+      containerPort: 8083
+      
 resources:
   limits:
     memory: "512Mi"
