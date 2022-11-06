@@ -3,4 +3,4 @@ type: application
 version: 0.1.0
 name: auth
 appVersion: "0.1"
-description: "Main description"
+description: "Auth description"

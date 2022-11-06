@@ -1,7 +1,6 @@
 apiVersion: v2
 type: application
 version: 0.1.0
-name: main
+name: email
 appVersion: "0.1"
-description: "Main chart"
-
+description: "Email description"
