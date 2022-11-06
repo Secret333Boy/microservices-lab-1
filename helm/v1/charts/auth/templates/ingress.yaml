@@ -9,10 +9,10 @@ spec:
   rules:
     - http:
         paths:
-          - path: /api/auth
+          - path: {{ .Values.ingress.mapping }}
             pathType: "Prefix"
             backend:
               service:
                 name: {{ .Chart.Name }}
                 port:
-                  number: 80
+                  number: {{ .Values.service.ports.port }}

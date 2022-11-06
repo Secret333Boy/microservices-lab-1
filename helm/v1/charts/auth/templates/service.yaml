@@ -5,7 +5,10 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 80
-      targetPort: 8082
+    {{- range .Values.service.ports }}
+    - name: {{ .name }}
+      port: {{ .port }}
+      targetPort: {{ .name }}
+    {{- end }}
   selector:
     app: {{ .Chart.Name }}-pod

@@ -14,17 +14,17 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-postgres-container
-          image: postgres:14.1-alpine3.15
+          image: {{ .Values.image.name }}
           imagePullPolicy: "IfNotPresent"
           ports:
-            - containerPort: 5432
+            - containerPort: {{ .Values.db.containerPort }}
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
+            - mountPath: {{ .Values.db.volumeMount }}
               name: postgredb
           resources:
             limits:
-              memory: "512Mi"
-              cpu: "250m"
+              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.limits.cpu }}
           env:
             - name: POSTGRES_DB
               valueFrom:

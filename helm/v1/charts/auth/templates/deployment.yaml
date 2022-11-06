@@ -33,13 +33,13 @@ spec:
                   name: {{ .Chart.Name }}-secret
                   key: POSTGRES_PASSWORD
       containers:
-        - image: secret333boy/auth:2.0
+        - image: {{ .Values.image.name }}
           name: {{ .Chart.Name }}-container
           ports:
-            - containerPort: 8082
+            - containerPort: {{ .Values.image.port }}
           env:
             - name: GATEWAY_URL
-              value: "http://192.168.49.2:80"
+              value: {{ .Values.gateway.url }}
             - name: PASSWORD_SALT
               valueFrom:
                 secretKeyRef:
@@ -72,5 +72,6 @@ spec:
                   key: POSTGRES_PASSWORD
           resources:
             limits:
-              memory: "512Mi"
-              cpu: "250m"
+              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.limits.cpu }}
+

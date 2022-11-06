@@ -1,19 +1,25 @@
 replicaCount: 1
 
 image:
-  name: zaranik/email-service:3.1
-  port: 8083
+  name: secret333boy/auth:2.0
+  port: 8082
 
 service:
   ports:
     - name: http
       port: 80
-      containerPort: 8083
+      containerPort: 8082
       
 resources:
   limits:
     memory: "512Mi"
     cpu: "250m"
+
+gateway:
+  url: "http://192.168.49.2:80"
+
+ingress:
+  mapping: /api/auth
 
 db:
   storage: "512Mi"
