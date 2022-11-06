@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ .Chart.Name }}-deployment
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: {{ .Chart.Name }}-pod

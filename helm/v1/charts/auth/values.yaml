@@ -8,7 +8,7 @@ service:
   ports:
     - name: http
       port: 80
-      containerPort: 8082
+      targetPort: 8082
       
 resources:
   limits:
