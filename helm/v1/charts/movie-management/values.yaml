@@ -15,6 +15,9 @@ resources:
     memory: "512Mi"
     cpu: "250m"
 
+ingress:
+  mapping: /api/movie-management
+
 postgresql:
   nameOverride: movie-management-postgres
   fullnameOverride: movie-management-postgres

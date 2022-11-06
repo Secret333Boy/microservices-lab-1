@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-deployment
+  name: {{ include "common.name" . }}-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-pod
+      app: {{ include "common.name" . }}-pod
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-pod
+        app: {{ include "common.name" . }}-pod
     spec:
       containers:
         - image: zaranik/client:5.0
-          name: {{ .Chart.Name }}-container
+          name: {{ include "common.name" . }}-container
           ports:
             - containerPort: 80
           resources:

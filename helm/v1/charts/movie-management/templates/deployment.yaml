@@ -1,39 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-deployment
+  name: {{ include "common.name" . }}-deployment
   labels:
-    app: {{ .Chart.Name }}-deployment
+    app: {{ include "common.name" . }}-deployment
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}-pod
+      app: {{ include "common.name" . }}-pod
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}-pod
+        app: {{ include "common.name" . }}-pod
     spec:
       containers:
         - image: 96223961382/movie-management-service:2.7
-          name: {{ .Chart.Name }}-container
+          name: {{ include "common.name" . }}-container
           ports:
             - containerPort: 8081
           env:
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Chart.Name }}-secret
+                  name: {{ include "common.name" . }}-secret
                   key: POSTGRES_DB
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Chart.Name }}-secret
+                  name: {{ include "common.name" . }}-secret
                   key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Chart.Name }}-secret
+                  name: {{ include "common.name" . }}-secret
                   key: POSTGRES_PASSWORD
             - name: MOVIE_MANAGEMENT_POSTGRES_SERVICE_HOST
               value: movie-management-postgres
