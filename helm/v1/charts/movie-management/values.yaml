@@ -1,14 +1,14 @@
 replicaCount: 1
 
 image:
-  name: zaranik/email-service:3.1
-  port: 8083
+  name: 96223961382/movie-management-service:2.7
+  port: 8081
 
 service:
   ports:
     - name: http
       port: 80
-      containerPort: 8083
+      containerPort: 8081
       
 resources:
   limits:
@@ -16,9 +16,9 @@ resources:
     cpu: "250m"
 
 postgresql:
-  nameOverride: email-postgres
-  fullnameOverride: email-postgres
-  postgresqlDatabase: "postgres"
+  nameOverride: movie-management-postgres
+  fullnameOverride: movie-management-postgres
+  postgresqlDatabase: "movie-management"
   postgresqlUsername: "postgres"
   postgresqlPassword: "postgres"
   postgresqlPostgresPassword: "postgres"

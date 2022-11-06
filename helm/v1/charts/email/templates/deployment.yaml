@@ -46,4 +46,8 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Chart.Name }}-secret
-                  key: EMAIL_KEY                  
+                  key: EMAIL_KEY     
+            - name: EMAIL_POSTGRES_SERVICE_HOST
+              value: email-postgres
+            - name: EMAIL_POSTGRES_SERVICE_PORT
+              value: "5432"             

@@ -12,22 +12,22 @@ service:
       
 resources:
   limits:
-    memory: "512Mi"
-    cpu: "250m"
+    memory: 512Mi
+    cpu: 250m
 
 gateway:
   url: "http://192.168.49.2:80"
 
 ingress:
   mapping: /api/auth
-
-db:
-  storage: "512Mi"
-  resources:
-    limits:
-      memory: "512Mi"
-      cpu: "250m"
-  containerPort: 5432
-  servicePort: 5432
-  volumeMount: /var/lib/postgresql/data
-  image: postgres:14.1-alpine3.15
+  
+postgresql:
+  nameOverride: auth-postgres
+  fullnameOverride: auth-postgres
+  postgresqlDatabase: "postgres"
+  postgresqlUsername: "postgres"
+  postgresqlPassword: "postgres"
+  postgresqlPostgresPassword: "postgres"
+  persistence:
+    size: 1Gi
+    mountPath: /var/lib/postgresql/data

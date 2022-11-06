@@ -35,6 +35,10 @@ spec:
                 secretKeyRef:
                   name: {{ .Chart.Name }}-secret
                   key: POSTGRES_PASSWORD
+            - name: MOVIE_MANAGEMENT_POSTGRES_SERVICE_HOST
+              value: movie-management-postgres
+            - name: MOVIE_MANAGEMENT_POSTGRES_SERVICE_PORT
+              value: "5432"
           resources:
             limits:
               memory: "512Mi"

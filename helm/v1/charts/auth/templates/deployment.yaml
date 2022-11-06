@@ -32,6 +32,10 @@ spec:
                 secretKeyRef:
                   name: {{ .Chart.Name }}-secret
                   key: POSTGRES_PASSWORD
+            - name: AUTH_POSTGRES_SERVICE_HOST
+              value: auth-postgres
+            - name: AUTH_POSTGRES_SERVICE_PORT
+              value: "5432"
       containers:
         - image: {{ .Values.image.name }}
           name: {{ .Chart.Name }}-container
@@ -70,6 +74,10 @@ spec:
                 secretKeyRef:
                   name: {{ .Chart.Name }}-secret
                   key: POSTGRES_PASSWORD
+            - name: AUTH_POSTGRES_SERVICE_HOST
+              value: auth-postgres
+            - name: AUTH_POSTGRES_SERVICE_PORT
+              value: "5432"
           resources:
             limits:
               memory: {{ .Values.resources.limits.memory }}
