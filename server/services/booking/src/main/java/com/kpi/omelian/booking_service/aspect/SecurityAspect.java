@@ -25,14 +25,22 @@ public class SecurityAspect {
     @Value("${auth-service.url}")
     private String authServiceUrl;
 
-    @Autowired
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
+
+    private final HttpServletResponse response;
+
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    private HttpServletResponse response;
-
-    @Autowired
-    private ObjectMapper objectMapper;
+    public SecurityAspect(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            ObjectMapper objectMapper
+    ) {
+        this.request = request;
+        this.response = response;
+        this.objectMapper = objectMapper;
+    }
 
     @Around("com.kpi.omelian.booking_service.aspect.SecurityPointcuts.allSecuredMethods()")
     public void allSecuredMethodsAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -45,9 +53,8 @@ public class SecurityAspect {
         httpHeaders.set(HttpHeaders.AUTHORIZATION, authorizationHeader);
         HttpEntity<Void> httpEntity = new HttpEntity<>(httpHeaders);
 
-        ResponseEntity<String> authServiceResponse = null;
         try {
-            authServiceResponse = restTemplate.exchange(
+            restTemplate.exchange(
                     authServiceUrl,
                     HttpMethod.GET,
                     httpEntity,

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "common.name" . }}-deployment
+  labels:
+    app: {{ include "common.name" . }}-deployment
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "common.name" . }}-pod
+  template:
+    metadata:
+      labels:
+        app: {{ include "common.name" . }}-pod
+    spec:
+      containers:
+        - image: 96223961382/movie-management-service:2.7
+          name: {{ include "common.name" . }}-container
+          ports:
+            - containerPort: 8081
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "common.name" . }}-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "common.name" . }}-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "common.name" . }}-secret
+                  key: POSTGRES_PASSWORD
+            - name: MOVIE_MANAGEMENT_POSTGRES_SERVICE_HOST
+              value: {{ include "common.name" . }}-postgres
+            - name: MOVIE_MANAGEMENT_POSTGRES_SERVICE_PORT
+              value: "5432"
+          resources:
+            limits:
+              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.limits.cpu }}

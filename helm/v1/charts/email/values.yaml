@@ -1,0 +1,30 @@
+replicaCount: 1
+
+image:
+  name: zaranik/email-service:3.1
+  port: 8083
+
+service:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8083
+
+resources:
+  limits:
+    memory: "512Mi"
+    cpu: "250m"
+
+db:
+  port: "5432"
+
+postgresql:
+  nameOverride: email-postgres
+  fullnameOverride: email-postgres
+  postgresqlDatabase: "postgres"
+  postgresqlUsername: "postgres"
+  postgresqlPassword: "postgres"
+  postgresqlPostgresPassword: "postgres"
+  persistence:
+    size: 1Gi
+    mountPath: /var/lib/postgresql/data

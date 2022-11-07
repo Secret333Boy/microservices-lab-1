@@ -1,0 +1,10 @@
+apiVersion: v2
+type: application
+version: 0.1.0
+name: movie-management
+appVersion: "0.1"
+description: "Movie-management description"
+dependencies:
+  - name: postgresql
+    version: 10.16.2
+    repository: https://charts.bitnami.com/bitnami
