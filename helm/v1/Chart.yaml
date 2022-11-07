@@ -4,3 +4,7 @@ version: 0.1.0
 name: main
 appVersion: "0.1"
 description: "Main chart"
+dependencies:
+  - name: common
+    version: 0.1.0
+    repository: file://charts/common
