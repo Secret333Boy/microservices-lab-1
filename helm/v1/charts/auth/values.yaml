@@ -9,18 +9,18 @@ service:
     - name: http
       port: 80
       targetPort: 8082
-      
+
 resources:
   limits:
-    memory: 512Mi
-    cpu: 250m
+    memory: "512Mi"
+    cpu: "250m"
 
 gateway:
   url: "http://192.168.49.2:80"
 
 ingress:
   mapping: /api/auth
-  
+
 postgresql:
   nameOverride: auth-postgres
   fullnameOverride: auth-postgres

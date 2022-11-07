@@ -8,12 +8,15 @@ service:
   ports:
     - name: http
       port: 80
-      containerPort: 8083
-      
+      targetPort: 8083
+
 resources:
   limits:
     memory: "512Mi"
     cpu: "250m"
+
+db:
+  port: "5432"
 
 postgresql:
   nameOverride: email-postgres

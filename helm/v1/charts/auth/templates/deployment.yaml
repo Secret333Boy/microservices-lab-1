@@ -33,7 +33,7 @@ spec:
                   name: {{ include "common.name" . }}-secret
                   key: POSTGRES_PASSWORD
             - name: AUTH_POSTGRES_SERVICE_HOST
-              value: auth-postgres
+              value: {{ include "common.name" . }}-postgres
             - name: AUTH_POSTGRES_SERVICE_PORT
               value: "5432"
       containers:
@@ -75,7 +75,7 @@ spec:
                   name: {{ include "common.name" . }}-secret
                   key: POSTGRES_PASSWORD
             - name: AUTH_POSTGRES_SERVICE_HOST
-              value: auth-postgres
+              value: {{ include "common.name" . }}-postgres
             - name: AUTH_POSTGRES_SERVICE_PORT
               value: "5432"
           resources:

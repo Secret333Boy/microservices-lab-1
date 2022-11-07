@@ -19,5 +19,5 @@ spec:
             - containerPort: 80
           resources:
             limits:
-              memory: "512Mi"
-              cpu: "250m"
+              memory: {{ .Values.resources.limits.memory }}
+              cpu: {{ .Values.resources.limits.cpu }}
