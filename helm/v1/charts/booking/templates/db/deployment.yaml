@@ -1,22 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: email-deployment
+  name: booking-pg-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: email-pod
+      app: booking-pg-pod
   template:
     metadata:
       labels:
-        app: email-pod
+        app: booking-pg-pod
     spec:
       containers:
-        - image: zaranik/email-service:3.1
-          name: email-container
+        - name: booking-pg-container
+          image: postgres:14.1-alpine3.15
+          imagePullPolicy: "IfNotPresent"
           ports:
-            - containerPort: 8083
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb
           resources:
             limits:
               memory: "512Mi"
@@ -25,25 +29,19 @@ spec:
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: email-secret
+                  name: booking-postgres-secret
                   key: POSTGRES_DB
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: email-secret
+                  name: booking-postgres-secret
                   key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: email-secret
+                  name: booking-postgres-secret
                   key: POSTGRES_PASSWORD
-            - name: FROM_EMAIL_VALUE
-              valueFrom:
-                secretKeyRef:
-                  name: email-secret
-                  key: FROM_EMAIL_VALUE
-            - name: EMAIL_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: email-secret
-                  key: EMAIL_KEY                  
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: booking-pg-volume-claim
