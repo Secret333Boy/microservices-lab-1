@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: booking-deployment
+  labels:
+    app: booking-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: booking-pod
+  template:
+    metadata:
+      labels:
+        app: booking-pod
+    spec:
+      containers:
+        - image: dichikk/booking-service:1.0
+          name: booking-container
+          ports:
+            - containerPort: 8084
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+            - secretRef:
+                name: postgres-secret
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "250m"
