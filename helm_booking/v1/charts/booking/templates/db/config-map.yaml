@@ -1,12 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-<<<<<<<< HEAD:helm_booking/v1/charts/booking/templates/db/config-map.yaml
-  name: booking-config
-========
   name: {{ include "common.name" . }}-secret
 type: Opaque
->>>>>>>> origin/master:helm_booking/v4/charts/booking/templates/templates/secrets/movie-management-secrets.yaml
 data:
   POSTGRES_DB: bW92aWUtbWFuYWdlbWVudA==
   POSTGRES_USER: cG9zdGdyZXM=
