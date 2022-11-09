@@ -1,0 +1,33 @@
+replicaCount: 1
+
+image:
+  name: 96223961382/movie-management-service:2.7
+  port: 8081
+
+service:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8081
+
+resources:
+  limits:
+    memory: "512Mi"
+    cpu: "250m"
+
+ingress:
+  mapping: /api/movie-management
+
+db:
+  port: "5432"
+
+postgresql:
+  nameOverride: movie-management-postgres
+  fullnameOverride: movie-management-postgres
+  postgresqlDatabase: "movie-management"
+  postgresqlUsername: "postgres"
+  postgresqlPassword: "postgres"
+  postgresqlPostgresPassword: "postgres"
+  persistence:
+    size: 1Gi
+    mountPath: /var/lib/postgresql/data

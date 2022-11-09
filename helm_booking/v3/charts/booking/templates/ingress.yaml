@@ -1,5 +1,6 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
+<<<<<<< HEAD:helm_booking/v3/charts/booking/templates/ingress.yaml
 metadata:
   name: booking-ingress
   annotations:
@@ -15,3 +16,6 @@ spec:
                 name: booking
                 port:
                   number: {{ .Values.ingress.port }}
+=======
+{{ include "common.ingress" . }}
+>>>>>>> origin/master:helm/v1/charts/auth/templates/ingress.yaml
