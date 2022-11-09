@@ -1,0 +1,10 @@
+apiVersion: v2
+type: application
+version: 0.0.2
+name: booking
+appVersion: "0.2"
+description: "Main chart"
+dependencies:
+  - name: postgresql
+    version: 10.16.2
+    repository: https://charts.bitnami.com/bitnami

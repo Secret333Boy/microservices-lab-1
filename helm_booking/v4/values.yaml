@@ -1,0 +1,9 @@
+postgresql:
+  fullnameOverride: booking-postgres
+  postgresqlDatabase: "booking-service"
+  postgresqlUsername: "admin"
+  postgresqlPassword: "admin"
+  postgresqlPostgresPassword: "postgres"
+  persistence:
+    size: 1Gi
+    mountPath: /var/lib/postgresql/data

@@ -1,0 +1,32 @@
+replicaCount: 1
+
+selector:
+  app: booking  
+
+image:
+  name: dichikk/booking-service:1.0
+  tag: 0.1
+  port: 8084
+
+service:
+  ports:
+    - name: http
+      port: 80
+      containerPort: 8084
+
+ingress:
+  path: /api/booking
+  port: 80
+
+db:
+  port: 5432
+
+postgresql:
+  fullnameOverride: booking-postgres
+  postgresqlDatabase: "booking-service"
+  postgresqlUsername: "admin"
+  postgresqlPassword: "admin"
+  postgresqlPostgresPassword: "postgres"
+  persistence:
+    size: 1Gi
+    mountPath: /var/lib/postgresql/data
