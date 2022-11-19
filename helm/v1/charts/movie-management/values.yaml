@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  name: 96223961382/movie-management-service:2.7
+  name: zaranik/movie-management-service:2.71
   port: 8081
 
 service:
