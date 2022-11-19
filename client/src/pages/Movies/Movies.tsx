@@ -2,19 +2,25 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../page.css";
 import "../../custom-button.css";
-import Movie from "../../components/Movie";
+import Movie from "../../components/Movie/Movie";
+import ApiService from "../../services/ApiService";
 
-
-const MoviesPage = () => {
-  interface movie {id:number, name:string, description:string};
-  const [movies, setMovies] = useState<movie[]>([]);
+const Movies = () => {
+  interface Movie {
+    id: number;
+    name: string;
+    description: string;
+  }
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
-    const getMovies = async () => {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL || 'http://192.168.49.2:80'}/api/movie-management/movies`);
-      setMovies(await response.json());
-    };
-    getMovies();
+    (async () => {
+      const { data } = await ApiService.get<Movie[]>(
+        "/movie-management/movies"
+      );
+      if (!data) return;
+      setMovies(data);
+    })();
   }, []);
 
   return (
@@ -34,4 +40,4 @@ const MoviesPage = () => {
   );
 };
 
-export default MoviesPage;
+export default Movies;

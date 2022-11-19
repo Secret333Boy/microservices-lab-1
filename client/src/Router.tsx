@@ -1,16 +1,42 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CinemasPage from "./pages/CinemasPage";
-import HomePage from "./pages/HomePage";
-import MoviesPage from "./pages/MoviesPage";
+import AuthProvider from "./components/AuthProvider";
+import Cinemas from "./pages/Cinemas";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Movies from "./pages/Movies";
+import Register from "./pages/Register";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/cinemas" element={<CinemasPage />} />
-        <Route path="/movies" element={<MoviesPage />} />
+        <Route
+          path="/"
+          element={
+            <AuthProvider>
+              <Home />
+            </AuthProvider>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/cinemas"
+          element={
+            <AuthProvider>
+              <Cinemas />
+            </AuthProvider>
+          }
+        />
+        <Route
+          path="/movies"
+          element={
+            <AuthProvider>
+              <Movies />
+            </AuthProvider>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

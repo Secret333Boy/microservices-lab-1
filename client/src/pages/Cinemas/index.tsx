@@ -2,16 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../page.css";
 import "../../custom-button.css";
-import Movie from "../../components/Movie";
+import Movie from "../../components/Movie/Movie";
+import ApiService from "../../services/ApiService";
 
 const CinemasPage = () => {
-  interface cinema {id:number, name:string, location:string};
-  const [cinemas, setCinemas] = useState<cinema[]>([]);
+  interface Cinema {
+    id: number;
+    name: string;
+    location: string;
+  }
+  const [cinemas, setCinemas] = useState<Cinema[]>([]);
 
   useEffect(() => {
     const getCinemas = async () => {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL || 'http://192.168.49.2:80'}/api/movie-management/cinemas`);
-      setCinemas(await response.json());
+      const { data } = await ApiService.get<Cinema[]>(
+        `${process.env.REACT_APP_BACKEND_URL}/api/movie-management/cinemas`
+      );
+
+      if (!data) return;
+
+      setCinemas(data);
     };
     getCinemas();
   }, []);
@@ -23,13 +33,12 @@ const CinemasPage = () => {
           <Link to="/">To home</Link>
         </button>
       </div>
-      
+
       <div className="movie-container">
         {cinemas.map(({ id, name, location }) => (
           <Movie key={id} name={name} description={location} id={id} />
         ))}
       </div>
-
     </div>
   );
 };

@@ -101,4 +101,8 @@ export default class AuthService {
       throw ApiError.badRequest("User is already activated");
     await user.update({ isActivated: true });
   }
+
+  public async getAccount() {
+
+  }
 }

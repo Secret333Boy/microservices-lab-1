@@ -13,7 +13,7 @@ spec:
         app: {{ include "common.name" . }}-pod
     spec:
       containers:
-        - image: zaranik/client:5.0
+        - image: secret333boy/client:1.3
           name: {{ include "common.name" . }}-container
           ports:
             - containerPort: 80
