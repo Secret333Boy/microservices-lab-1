@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  name: secret333boy/auth:2.2
+  name: zaranik/auth:2.3
   port: 8082
 
 service:
@@ -16,7 +16,7 @@ resources:
     cpu: "250m"
 
 gateway:
-  url: "http://localhost:80"
+  url: "http://192.168.49.2:80"
 
 ingress:
   mapping: /api/auth

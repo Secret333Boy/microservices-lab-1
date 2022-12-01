@@ -4,7 +4,7 @@ selector:
   app: booking
 
 image:
-  name: zaranik/booking-service:1.1
+  name: zaranik/booking-service:2.2
   tag: 0.1
   port: 8084
 
@@ -15,8 +15,7 @@ service:
       containerPort: 8084
 
 ingress:
-  path: /api/booking
-  port: 80
+  mapping: /api/booking
 
 db:
   port: 5432
