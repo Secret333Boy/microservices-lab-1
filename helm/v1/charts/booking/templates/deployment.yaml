@@ -21,7 +21,7 @@ spec:
             - configMapRef:
                 name: postgres-config
             - secretRef:
-                name: postgres-secret
+                name: booking-secret
           resources:
             limits:
               memory: "512Mi"
