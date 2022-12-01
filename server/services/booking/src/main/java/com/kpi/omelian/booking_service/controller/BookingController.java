@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/booking/book")
 public class BookingController {
-    // TODO integretion with user
+    // TODO integretion with user ---> done
     // TODO send email
     private final IBookingService bookingService;
     private final ModelMapper modelMapper;

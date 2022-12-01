@@ -25,17 +25,17 @@ public class BookingService implements IBookingService {
 
     @Override
     public List<Ticket> getAllTicketsByUserId(Long userId) {
-        return this.ticketRepository.findByUserId(userId).orElse(null);
+        return this.ticketRepository.findByUserId(userId);
     }
 
     @Override
     public List<Ticket> getAllTicketsBySessionId(Long sessionId) {
-        return this.ticketRepository.findBySessionId(sessionId).orElse(null);
+        return this.ticketRepository.findBySessionId(sessionId);
     }
 
     @Override
     public List<Ticket> getAllTicketsByPlaceId(Long placeId) {
-        return this.ticketRepository.findByPlaceId(placeId).orElse(null);
+        return this.ticketRepository.findByPlaceId(placeId);
     }
 
     @Override
