@@ -20,9 +20,9 @@ public class DemoMovieFeedbackRepository {
             for (int i = 0; i < 5; i++) {
                 this.movieFeedbacks.add(MovieFeedback.builder()
                         .movie(movie)
-                        .score(random.nextInt(1, 11))
+                        .score(random.nextInt() % 10 + 1)
                         .comment(String.format("Feedback %d for movie %d", i + 1, movie.getId()))
-                        .userId(random.nextLong(1, 6))
+                        .userId(random.nextLong() % 5 + 1)
                         .build());
             }
         }
