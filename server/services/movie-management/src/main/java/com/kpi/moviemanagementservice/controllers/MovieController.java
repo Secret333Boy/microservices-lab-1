@@ -1,5 +1,13 @@
 package com.kpi.moviemanagementservice.controllers;
 
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import static org.springframework.web.bind.annotation.RequestMethod.OPTIONS;
+import static org.springframework.web.bind.annotation.RequestMethod.PATCH;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+
 import com.kpi.moviemanagementservice.models.Movie;
 import com.kpi.moviemanagementservice.models.MovieFeedback;
 import com.kpi.moviemanagementservice.services.MovieFeedbackService;
@@ -12,6 +20,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/movie-management/movies")
 @RequiredArgsConstructor
+@CrossOrigin(allowCredentials = "true", methods = {GET, POST, PUT, DELETE, OPTIONS, HEAD, PATCH},
+  origins = {"http://localhost:3000", "http://192.168.49.2:80", "http://localhost:80"})
 public class MovieController {
 
     private final MovieService movieService;

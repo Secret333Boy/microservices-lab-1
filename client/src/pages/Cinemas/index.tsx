@@ -5,6 +5,8 @@ import "../../custom-button.css";
 import Movie from "../../components/Movie/Movie";
 import ApiService from "../../services/ApiService";
 
+const DATA = '[{"id":1,"name":"Cinema 1","location":"Location of the cinema 1"},{"id":2,"name":"Cinema 2","location":"Location of the cinema 2"},{"id":3,"name":"Cinema 3","location":"Location of the cinema 3"}]'
+
 const CinemasPage = () => {
   interface Cinema {
     id: number;
@@ -15,10 +17,7 @@ const CinemasPage = () => {
 
   useEffect(() => {
     const getCinemas = async () => {
-      const { data } = await ApiService.get<Cinema[]>(
-        `${process.env.REACT_APP_BACKEND_URL}/api/movie-management/cinemas`
-      );
-
+      const data = JSON.parse(DATA);
       if (!data) return;
 
       setCinemas(data);

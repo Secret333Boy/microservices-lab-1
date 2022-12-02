@@ -13,11 +13,18 @@ spec:
         app: {{ include "common.name" . }}-pod
     spec:
       containers:
-        - image: secret333boy/client:1.3
+        - image: zaranik/client:1.41
           name: {{ include "common.name" . }}-container
           ports:
             - containerPort: 80
+          env:
+            - name: REACT_APP_GATEWAY_URL
+              valueFrom:
+                secretKeyRef:
+                  name: client-secret
+                  key: REACT_APP_GATEWAY_URL
           resources:
             limits:
               memory: {{ .Values.resources.limits.memory }}
               cpu: {{ .Values.resources.limits.cpu }}
+          
