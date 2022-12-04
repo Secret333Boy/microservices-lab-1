@@ -35,10 +35,6 @@ spec:
                 secretKeyRef:
                   name: {{ include "common.name" . }}-secret
                   key: POSTGRES_PASSWORD
-            - name: MOVIE_MANAGEMENT_POSTGRES_SERVICE_HOST
-              value: {{ include "common.name" . }}-postgres
-            - name: MOVIE_MANAGEMENT_POSTGRES_SERVICE_PORT
-              value: "5432"
           resources:
             limits:
               memory: {{ .Values.resources.limits.memory }}

@@ -46,8 +46,4 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "common.name" . }}-secret
-                  key: EMAIL_KEY     
-            - name: EMAIL_POSTGRES_SERVICE_HOST
-              value: {{ include "common.name" . }}-postgres
-            - name: EMAIL_POSTGRES_SERVICE_PORT
-              value: "5432"
+                  key: EMAIL_KEY
