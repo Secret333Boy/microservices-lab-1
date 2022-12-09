@@ -19,9 +19,9 @@ public class DemoCinemaFeedbackRepository {
             for (int i = 0; i < 5; i++) {
                 this.cinemaFeedbacks.add(CinemaFeedback.builder()
                         .cinema(cinema)
-                        .score(random.nextInt(1, 11))
+                        .score(i * 2)
                         .comment(String.format("Feedback %d for cinema %d", i + 1, cinema.getId()))
-                        .userId(random.nextLong(1, 6))
+                        .userId((long) i)
                         .build());
             }
         }

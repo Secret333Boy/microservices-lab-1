@@ -22,7 +22,19 @@ if (!process.env.dev) {
 const app: Express = express();
 app.disable("x-powered-by");
 app.use(express.json());
-app.use(cors({ credentials: true, origin: process.env.FRONTEND_URL || "*" }));
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:80",
+  "http://192.168.49.2:80",
+];
+
+const options: cors.CorsOptions = {
+  credentials: true,
+  origin: allowedOrigins,
+};
+
+app.use(cors(options));
 app.use(express.static(path.resolve(__dirname, "public")));
 app.use(
   "/auth/docs",
@@ -35,7 +47,6 @@ app.use(
 );
 registerRoutes(app);
 app.use(errorMiddleware);
-
 app.get("*", async (_req: Request, res: Response) => {
   res.status(404).end();
 });

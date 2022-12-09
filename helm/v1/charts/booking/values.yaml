@@ -1,10 +1,10 @@
 replicaCount: 1
 
 selector:
-  app: booking  
+  app: booking
 
 image:
-  name: dichikk/booking-service:1.0
+  name: zaranik/booking-service:2.2
   tag: 0.1
   port: 8084
 
@@ -15,8 +15,7 @@ service:
       containerPort: 8084
 
 ingress:
-  path: /api/booking
-  port: 80
+  mapping: /api/booking
 
 db:
   port: 5432
@@ -24,8 +23,8 @@ db:
 postgresql:
   fullnameOverride: booking-postgres
   postgresqlDatabase: "booking-service"
-  postgresqlUsername: "admin"
-  postgresqlPassword: "admin"
+  postgresqlUsername: "postgres"
+  postgresqlPassword: "postgres"
   postgresqlPostgresPassword: "postgres"
   persistence:
     size: 1Gi

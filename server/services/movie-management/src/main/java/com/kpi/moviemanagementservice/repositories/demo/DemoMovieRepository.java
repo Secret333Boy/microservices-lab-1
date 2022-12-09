@@ -19,7 +19,7 @@ public class DemoMovieRepository {
             this.movies.add(Movie.builder()
                     .name("Movie " + (i + 1))
                     .description("Description of movie " + (i + 1))
-                    .duration(random.nextLong(60 * 1000, 24 * 60 * 60 * 1000))
+                    .duration(random.nextLong() % (24 * 60 * 60 * 1000) + 60 * 1000)
                     .imagePath(String.format("/src/main/resources/images/image%d.jpg", i + 1))
                     .build());
         }

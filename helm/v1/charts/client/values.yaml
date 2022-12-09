@@ -1,10 +1,19 @@
 ingress:
   mapping: /
 
+image:
+  name: zaranik/client:1.41
+  port: 80
+
 resources:
   limits:
     memory: "512Mi"
     cpu: "250m"
+
+env:
+  - name: REACT_APP_GATEWAY_URL
+    type: secret
+    value: REACT_APP_GATEWAY_URL
 
 service:
   ports:

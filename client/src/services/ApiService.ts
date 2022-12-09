@@ -1,7 +1,7 @@
 import HttpService, { CustomRequestInit, FetchResult } from './HttpService';
 
 export default class ApiService extends HttpService {
-  private static readonly BASE_URL = `${process.env.REACT_APP_GATEWAY_URL || 'http://localhost:80'}/api`;
+  private static readonly BASE_URL = `${process.env.REACT_APP_GATEWAY_URL || 'http://192.168.49.2:80'}/api`;
 
   public static async get<T>(
     url: string,

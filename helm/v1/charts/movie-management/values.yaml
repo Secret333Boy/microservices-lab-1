@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  name: zaranik/movie-management-service:2.72
+  name: zaranik/movie-management:2.80
   port: 8081
 
 service:
@@ -14,6 +14,17 @@ resources:
   limits:
     memory: "512Mi"
     cpu: "250m"
+
+env:
+  - name: POSTGRES_DB
+    type: secret
+    value: POSTGRES_DB
+  - name: POSTGRES_USER
+    type: secret
+    value: POSTGRES_USER
+  - name: POSTGRES_PASSWORD
+    type: secret
+    value: POSTGRES_PASSWORD
 
 ingress:
   mapping: /api/movie-management
