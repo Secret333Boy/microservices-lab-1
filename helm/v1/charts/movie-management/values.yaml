@@ -15,6 +15,17 @@ resources:
     memory: "512Mi"
     cpu: "250m"
 
+env:
+  - name: POSTGRES_DB
+    type: secret
+    value: POSTGRES_DB
+  - name: POSTGRES_USER
+    type: secret
+    value: POSTGRES_USER
+  - name: POSTGRES_PASSWORD
+    type: secret
+    value: POSTGRES_PASSWORD
+
 ingress:
   mapping: /api/movie-management
 
