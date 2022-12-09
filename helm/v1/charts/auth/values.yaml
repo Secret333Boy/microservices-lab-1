@@ -17,7 +17,7 @@ resources:
 
 migrations:
   image: secret333boy/auth-migrations:1.2
-  command: ["db-migrate", "up", "--config", "database.json", "-e", "prod"]
+  command: '["db-migrate", "up", "--config", "database.json", "-e", "prod"]'
 
 env:
   - name: GATEWAY_URL

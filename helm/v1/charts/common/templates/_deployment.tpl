@@ -21,7 +21,7 @@ spec:
       labels:
         app: {{ include "common.name" . }}-pod
     spec:
-      {{ $myChartName := {{ include "common.name" . }} }}
+      {{ $myChartName := include "common.name" . }}
       {{ if .Values.migrations }}
       initContainers:
         - name: {{ include "common.name" . }}-migration
