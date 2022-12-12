@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS TICKETS (
-    ID bigint NOT NULL,
+    ID bigserial NOT NULL,
     PRICE decimal(10, 2) NOT NULL,
     USER_ID bigint DEFAULT NULL,
     SESSION_ID bigint,
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS TICKETS (
 );
 
 CREATE TABLE IF NOT EXISTS SESSIONS (
-     ID bigint NOT NULL,
+     ID bigserial NOT NULL,
      MOVIE_ID bigint,
      HALL_ID bigint,
      START_TIME date,

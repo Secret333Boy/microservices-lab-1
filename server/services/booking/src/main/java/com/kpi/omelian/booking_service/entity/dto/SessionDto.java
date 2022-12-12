@@ -1,14 +1,15 @@
 package com.kpi.omelian.booking_service.entity.dto;
 
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class SessionDto {
 
     private Long movieId;
@@ -17,8 +18,8 @@ public class SessionDto {
 
     private Long cinemaId;
 
-    private Date startTime;
+    private LocalDateTime startTime;
 
-    private Date endTime;
+    private LocalDateTime endTime;
 
 }

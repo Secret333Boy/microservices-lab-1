@@ -1,12 +1,12 @@
 package com.kpi.omelian.booking_service.entity;
 
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import java.time.LocalDate;
 
 @Entity
 @Data
@@ -28,8 +28,8 @@ public class Session {
     @Min(value = 1, message = "Cinema id can't be less than 1.")
     private Long cinemaId;
 
-    private LocalDate startTime;
+    private LocalDateTime startTime;
 
-    private LocalDate endTime;
+    private LocalDateTime endTime;
 
 }
