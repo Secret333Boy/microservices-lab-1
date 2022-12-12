@@ -7,8 +7,8 @@ import com.kpi.omelian.booking_service.exception.BookingSeatNotValidException;
 import com.kpi.omelian.booking_service.exception.NonExistedTicketError;
 import com.kpi.omelian.booking_service.repository.SessionRepository;
 import com.kpi.omelian.booking_service.repository.TicketRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Hibernate;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +20,7 @@ public class BookingService implements IBookingService {
 
     private final TicketRepository ticketRepository;
     private final SessionRepository sessionRepository;
+    private final MovieManagementRequestPerformerService requestPerformerService;
     private final ModelMapper modelMapper;
 
     @Override
@@ -44,8 +45,12 @@ public class BookingService implements IBookingService {
 
     @Override
     public Ticket bookSeat(TicketDto ticketDto) {
-        Session session = (Session) Hibernate.unproxy(sessionRepository.getById(ticketDto.getSessionId()));
+        Optional<Session> sessionOptional = sessionRepository.findById(ticketDto.getSessionId());
+        if(sessionOptional.isEmpty()){
+            throw new BookingSeatNotValidException();
+        }
         Long placeId = ticketDto.getPlaceId();
+        Session session = sessionOptional.get();
         if(ticketRepository.existsByPlaceIdEqualsAndSession(placeId, session)){
             throw new BookingSeatNotValidException();
         }
