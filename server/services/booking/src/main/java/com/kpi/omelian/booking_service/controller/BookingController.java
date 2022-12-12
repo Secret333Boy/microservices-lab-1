@@ -27,7 +27,6 @@ public class BookingController {
         this.modelMapper = modelMapper;
     }
 
-    @SecuredEndpoint
     @GetMapping
     public List<TicketDto> getAll() {
         return this.bookingService.getAllTickets().stream()

@@ -16,6 +16,12 @@ public class GlobalExceptionHandler {
         return ApiError.justCaused(e.getMessage());
     }
 
+    @ExceptionHandler(BookingSeatNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiError bookingSeatNotValidExceptionHandler() {
+        return ApiError.justCaused("booking seat operation failed");
+    }
+
     @ExceptionHandler(ConnectException.class)
     @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
     public ApiError SERVICE_UNAVAILABLE(){

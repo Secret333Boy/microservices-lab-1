@@ -26,7 +26,6 @@ public class Ticket {
     @Min(value = 1, message = "User id can't be less than 1.")
     private Long userId;
 
-    @Min(value = 1, message = "Session id can't be less than 1.")
     @ManyToOne
     @JoinColumn(name = "session_id")
     private Session session;

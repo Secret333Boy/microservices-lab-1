@@ -2,11 +2,9 @@ package com.kpi.omelian.booking_service.service;
 
 import com.kpi.omelian.booking_service.entity.Session;
 import com.kpi.omelian.booking_service.entity.dto.SessionDto;
-import com.kpi.omelian.booking_service.entity.dto.TicketDto;
 import com.kpi.omelian.booking_service.exception.NonExistedSessionError;
 import com.kpi.omelian.booking_service.repository.SessionRepository;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -25,10 +23,8 @@ public class SessionService implements ISessionService {
   }
 
   @Override
-  public List<TicketDto> findAllSessions() {
-    return this.sessionRepository.findAll().stream()
-      .map(session -> modelMapper.map(session, TicketDto.class))
-      .collect(Collectors.toList());
+  public List<Session> findAllSessions() {
+    return this.sessionRepository.findAll();
   }
 
   @Override

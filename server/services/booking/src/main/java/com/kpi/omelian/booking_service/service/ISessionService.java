@@ -11,7 +11,7 @@ public interface ISessionService {
 
     Session save(SessionDto sessionDto);
 
-    List<TicketDto> findAllSessions();
+    List<Session> findAllSessions();
 
     void delete(Long sessionId) throws NonExistedSessionError;
 

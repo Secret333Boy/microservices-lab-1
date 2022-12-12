@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -64,8 +61,6 @@ public class SecurityAspect {
         httpEntity,
         String.class
       );
-    } catch(ResourceAccessException e){
-      throw e;
     } catch (RestClientException e) {
       sendResponse("Unauthorized user are not allowed to permit this operation.", 401);
       log.error("Authorized from another account, can't perform this request.");

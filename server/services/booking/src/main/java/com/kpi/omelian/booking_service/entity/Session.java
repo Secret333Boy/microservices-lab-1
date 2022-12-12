@@ -1,12 +1,12 @@
 package com.kpi.omelian.booking_service.entity;
 
 import java.time.LocalDateTime;
+import javax.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 
 @Entity
 @Data

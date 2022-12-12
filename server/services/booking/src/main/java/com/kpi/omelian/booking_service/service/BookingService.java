@@ -1,14 +1,17 @@
 package com.kpi.omelian.booking_service.service;
 
+import com.kpi.omelian.booking_service.entity.Session;
 import com.kpi.omelian.booking_service.entity.Ticket;
 import com.kpi.omelian.booking_service.entity.dto.TicketDto;
+import com.kpi.omelian.booking_service.exception.BookingSeatNotValidException;
 import com.kpi.omelian.booking_service.exception.NonExistedTicketError;
+import com.kpi.omelian.booking_service.repository.SessionRepository;
 import com.kpi.omelian.booking_service.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -16,6 +19,7 @@ import java.util.List;
 public class BookingService implements IBookingService {
 
     private final TicketRepository ticketRepository;
+    private final SessionRepository sessionRepository;
     private final ModelMapper modelMapper;
 
     @Override
@@ -40,7 +44,13 @@ public class BookingService implements IBookingService {
 
     @Override
     public Ticket bookSeat(TicketDto ticketDto) {
+        Session session = (Session) Hibernate.unproxy(sessionRepository.getById(ticketDto.getSessionId()));
+        Long placeId = ticketDto.getPlaceId();
+        if(ticketRepository.existsByPlaceIdEqualsAndSession(placeId, session)){
+            throw new BookingSeatNotValidException();
+        }
         Ticket ticket = modelMapper.map(ticketDto, Ticket.class);
+        ticket.setSession(session);
         return this.ticketRepository.save(ticket);
     }
 
