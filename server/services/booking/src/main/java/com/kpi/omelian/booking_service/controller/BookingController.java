@@ -3,13 +3,10 @@ package com.kpi.omelian.booking_service.controller;
 import com.kpi.omelian.booking_service.aspect.SecuredEndpoint;
 import com.kpi.omelian.booking_service.entity.Ticket;
 import com.kpi.omelian.booking_service.entity.dto.TicketDto;
-import com.kpi.omelian.booking_service.exception.NonExistedTicketError;
 import com.kpi.omelian.booking_service.service.IBookingService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,7 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/booking/book")
 public class BookingController {
-    // TODO integretion with user ---> done
+    // TODO integration with user ---> done
     // TODO send email
     private final IBookingService bookingService;
     private final ModelMapper modelMapper;

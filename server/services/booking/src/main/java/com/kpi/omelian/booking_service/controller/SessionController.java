@@ -22,13 +22,10 @@ import java.util.stream.Collectors;
 public class SessionController {
 
     private final SessionService sessionService;
-    private final ModelMapper modelMapper;
 
     @GetMapping
     public List<TicketDto> getAll() {
-        return this.sessionService.findAllSessions().stream()
-                .map(session -> this.modelMapper.map(session, TicketDto.class))
-                .collect(Collectors.toList());
+        return this.sessionService.findAllSessions();
     }
 
     @PostMapping

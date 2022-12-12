@@ -16,6 +16,6 @@ import org.springframework.retry.annotation.Retryable;
 * */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-@Retryable(value = ConnectException.class, backoff = @Backoff(delay = 2000))
+@Retryable(value = ConnectException.class, backoff = @Backoff(delay = 2000, maxDelay=2000))
 public @interface SecuredEndpoint {
 }

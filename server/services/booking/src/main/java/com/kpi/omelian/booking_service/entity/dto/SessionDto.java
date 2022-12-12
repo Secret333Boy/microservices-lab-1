@@ -15,6 +15,8 @@ public class SessionDto {
 
     private Long hallId;
 
+    private Long cinemaId;
+
     private Date startTime;
 
     private Date endTime;

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Data
@@ -25,6 +24,9 @@ public class Session {
 
     @Min(value = 1, message = "Hall id can't be less than 1.")
     private Long hallId;
+
+    @Min(value = 1, message = "Cinema id can't be less than 1.")
+    private Long cinemaId;
 
     private LocalDate startTime;
 

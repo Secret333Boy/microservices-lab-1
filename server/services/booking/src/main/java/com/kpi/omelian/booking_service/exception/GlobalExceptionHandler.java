@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ConnectException.class)
     @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
     public ApiError SERVICE_UNAVAILABLE(){
-        return ApiError.justCaused("Connection to another service refused");
+        return ApiError.justCaused("Service unavailable");
     }
 
 }
