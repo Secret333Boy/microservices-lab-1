@@ -1,11 +1,7 @@
 replicaCount: 1
 
-selector:
-  app: booking
-
 image:
-  name: zaranik/booking-service:2.2
-  tag: 0.1
+  name: zaranik/booking-service:2.3
   port: 8084
 
 service:
@@ -14,6 +10,22 @@ service:
       port: 80
       containerPort: 8084
 
+resources:
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
+
+env:
+  - name: POSTGRES_DB
+    type: secret
+    value: POSTGRES_DB
+  - name: POSTGRES_USER
+    type: secret
+    value: POSTGRES_USER
+  - name: POSTGRES_PASSWORD
+    type: secret
+    value: POSTGRES_PASSWORD
+
 ingress:
   mapping: /api/booking
 
@@ -21,6 +33,7 @@ db:
   port: 5432
 
 postgresql:
+  nameOverride: booking-postgres
   fullnameOverride: booking-postgres
   postgresqlDatabase: "booking-service"
   postgresqlUsername: "postgres"
