@@ -13,7 +13,7 @@ import ApiError from "../models/ApiError";
 import { request } from "undici";
 import { Kafka } from "kafkajs";
 
-const kafkaUrl = `http://${process.env.KAFKA_HOST}:9092`;
+const kafkaUrl = `${process.env.KAFKA_SERVICE_HOST}:${process.env.KAFKA_SERVICE_PORT}`;
 const kafka = new Kafka({ brokers: [kafkaUrl], clientId: "auth-service" });
 
 export default class AuthService {

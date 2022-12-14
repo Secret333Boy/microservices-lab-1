@@ -1,7 +1,7 @@
 replicaCount: 2
 
 image:
-  name: secret333boy/auth:2.3
+  name: secret333boy/auth:2.5
   port: 8082
 
 service:
