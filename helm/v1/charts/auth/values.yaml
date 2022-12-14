@@ -1,7 +1,7 @@
 replicaCount: 2
 
 image:
-  name: zaranik/auth:2.4.2
+  name: secret333boy/auth:2.3
   port: 8082
 
 service:
