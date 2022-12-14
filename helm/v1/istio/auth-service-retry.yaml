@@ -9,8 +9,8 @@ spec:
     - route:
         - destination:
             host: auth # ім'я Service до якого застосовується налаштування
-      timeout: 10s
+      timeout: 2s
       retries:
         attempts: 3
         retryOn: 5xx
-        perTryTimeout: 5s
+        perTryTimeout: 3s

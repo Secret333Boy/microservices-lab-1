@@ -12,8 +12,8 @@ service:
 
 resources:
   limits:
-    memory: "512Mi"
-    cpu: "500m"
+    memory: "300Mi"
+    cpu: "250m"
 
 env:
   - name: POSTGRES_DB

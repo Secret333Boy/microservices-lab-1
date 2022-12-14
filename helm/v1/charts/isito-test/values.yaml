@@ -1,0 +1,21 @@
+replicaCount: 1
+
+image:
+  name: zaranik/istio-test-service:1.0
+  port: 8086
+
+service:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8086
+
+resources:
+  limits:
+    memory: "300Mi"
+    cpu: "250m"
+
+ingress:
+  mapping: /api/request-service
+
+env:

@@ -1,5 +1,6 @@
 package com.kpi.omelian.booking_service.controller;
 
+import com.kpi.omelian.booking_service.aspect.SecuredEndpoint;
 import com.kpi.omelian.booking_service.entity.Ticket;
 import com.kpi.omelian.booking_service.entity.dto.TicketDto;
 import com.kpi.omelian.booking_service.service.IBookingService;
@@ -33,7 +34,7 @@ public class BookingController {
                 .collect(Collectors.toList());
     }
 
-    //@SecuredEndpoint
+    @SecuredEndpoint
     @PostMapping
     public Ticket book(@Valid @RequestBody TicketDto ticketDto) {
         return this.bookingService.bookSeat(ticketDto);

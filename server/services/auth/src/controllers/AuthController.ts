@@ -20,6 +20,8 @@ import ErrorResponse from '../models/interfaces/ErrorResponse';
 import PongResponse from '../models/interfaces/PongResponse';
 import UserDTO from '../models/interfaces/UserDTO';
 
+let throttlerFlag:boolean = false;
+
 @Route("/api/auth")
 export class AuthController extends Controller {
   private authService: AuthService = new AuthService();
@@ -34,8 +36,23 @@ export class AuthController extends Controller {
   }
 
   @Get("/ping")
-  public async ping() {
-    return <PongResponse>{ message: "pong" };
+  public async ping(): Promise<PongResponse> {
+    if (throttlerFlag) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(<PongResponse>{ message: "pong" });
+        }, Math.random() * 1000 + 2000)
+      });
+      
+    } else {
+      return <PongResponse>{ message: "pong" };
+    }
+  }
+
+  @Get("/crash")
+  public async crashEndpoint() {
+    throttlerFlag = true;
+    return { message: "pod has been successfully broken" };
   }
 
   @Post("/validateCredentials")
