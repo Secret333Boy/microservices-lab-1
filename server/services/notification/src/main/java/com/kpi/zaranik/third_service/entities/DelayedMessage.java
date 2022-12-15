@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "delayed_messages")
 @NoArgsConstructor
-public class DelayedMessage extends BaseEntity{
+public class DelayedMessage extends BaseEntity {
 
   private String emailTo;
 
@@ -34,6 +34,5 @@ public class DelayedMessage extends BaseEntity{
   public EMailDetails getEmailDetails(){
     return new EMailDetails(emailTo, caption, messageBody);
   }
-
 
 }

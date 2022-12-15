@@ -15,14 +15,14 @@ public class ScheduleService {
   private DelayedMessageRepository delayedMessageRepository;
 
   @Autowired
-  private MailService mailService;
+  private NotificationService notificationService;
 
   @Scheduled(fixedDelay = 10, timeUnit = TimeUnit.SECONDS)
   private void doCyclicLogs(){
     LocalDateTime now = LocalDateTime.now();
     List<DelayedMessage> list = delayedMessageRepository.findAllByWhenToSendMillisIsLessThan(now);
     list.forEach((msg) -> {
-      mailService.sendEMail(msg.getEmailDetails());
+      notificationService.sendEMail(msg.getEmailDetails());
       delayedMessageRepository.delete(msg);
     });
   }
