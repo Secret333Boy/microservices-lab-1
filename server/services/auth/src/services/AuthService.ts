@@ -11,10 +11,24 @@ import TokenStore from "../models/sequelize/TokenStore";
 import Validator from "../utils/Validator";
 import ApiError from "../models/ApiError";
 import { request } from "undici";
+import { Kafka } from "kafkajs";
 
-const emailURL = `http://${process.env.EMAIL_SERVICE_HOST}:${process.env.EMAIL_SERVICE_PORT}/api/email/send-activation`;
+const kafkaUrl = `${process.env.KAFKA_SERVICE_HOST}:${process.env.KAFKA_SERVICE_PORT}`;
+const kafka = new Kafka({ brokers: [kafkaUrl], clientId: "auth-service" });
+
 export default class AuthService {
   private tokenService: TokenService = new TokenService();
+  private notificationProducer = kafka.producer();
+
+  constructor() {
+    (async () => {
+      try {
+        await this.notificationProducer.connect();
+      } catch (e) {
+        console.error("Error while connecting to kafka: " + e);
+      }
+    })();
+  }
 
   public async validateCredentials(email: string, password: string) {
     const validator = new Validator();
@@ -29,22 +43,19 @@ export default class AuthService {
     const transaction = await sequelize.transaction();
     const user = await User.create({ email, hash }, { transaction });
     try {
-      console.log(emailURL);
-      const { statusCode: messageStatus, body } = await request(emailURL, {
-        method: "POST",
-        body: JSON.stringify({
-          email_to: user.email,
-          activation_link: `${
-            process.env.GATEWAY_URL
-          }/api/auth/activate/${user.activationId}`,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          "api-secret": <string>process.env.API_SECRET,
-        },
+      await this.notificationProducer.send({
+        topic: "notification",
+        messages: [
+          {
+            key: "type",
+            value: "activation-email",
+            headers: {
+              email_to: user.email,
+              activation_link: `${process.env.GATEWAY_URL}/api/auth/activate/${user.activationId}`,
+            },
+          },
+        ],
       });
-      console.error(await body.text());
-      if (messageStatus !== 200) throw new Error('Mail service issue');
     } catch (e) {
       await transaction.rollback();
       throw e;
@@ -102,7 +113,5 @@ export default class AuthService {
     await user.update({ isActivated: true });
   }
 
-  public async getAccount() {
-
-  }
+  public async getAccount() {}
 }

@@ -23,6 +23,7 @@
     "express": "^4.18.1",
     "find-config": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
+    "kafkajs": "^2.2.3",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.21.2",

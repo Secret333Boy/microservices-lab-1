@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  name: zaranik/email-service:3.1
+  name: zaranik/email:3.4
   port: 8083
 
 service:
@@ -16,32 +16,9 @@ resources:
     cpu: "250m"
 
 env:
-  - name: POSTGRES_DB
-    type: secret
-    value: POSTGRES_DB
-  - name: POSTGRES_USER
-    type: secret
-    value: POSTGRES_USER
-  - name: POSTGRES_PASSWORD
-    type: secret
-    value: POSTGRES_PASSWORD
   - name: FROM_EMAIL_VALUE
     type: secret
     value: FROM_EMAIL_VALUE
   - name: EMAIL_KEY
     type: secret
     value: EMAIL_KEY
-
-db:
-  port: "5432"
-
-postgresql:
-  nameOverride: email-postgres
-  fullnameOverride: email-postgres
-  postgresqlDatabase: "postgres"
-  postgresqlUsername: "postgres"
-  postgresqlPassword: "postgres"
-  postgresqlPostgresPassword: "postgres"
-  persistence:
-    size: 1Gi
-    mountPath: /var/lib/postgresql/data
